@@ -46,15 +46,6 @@ colors.error = colors.red
 
 
 /*==============================================================================
-  # Styles
-==============================================================================*/
-
-const styles = {
-  boxshadow: '0px 1px 8px 0px rgba(0, 0, 0, 0.086), 0px 8px 24px 0px rgba(0, 0, 0, 0.1)'
-}
-
-
-/*==============================================================================
   # Easings
 ==============================================================================*/
 
@@ -96,6 +87,51 @@ let easings = {
 
 easings.primary = easings.easeInOutQuint
 easings.secondary = easings.easeInOutSine
+
+
+/*==============================================================================
+  # Styles
+==============================================================================*/
+
+const linkEase = `
+  position: relative;
+  color: ${colors.text};
+  text-decoration: none;
+  transition: all 450ms ease;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    pointer-events: none;
+    background: ${colors.text};
+    transform: scale3d(0,1,1);
+    transform-origin: 100% 50%;
+    transition: background 450ms ease,
+                transform 450ms ${easings.primary};
+    will-change: transform;
+  }
+
+  &:focus,
+  &:hover {
+    color: ${colors.primary};
+
+    &::before {
+      background: ${colors.primary};
+      transform: scale3d(1,1,1);
+      transform-origin: 0% 50%;
+    }
+  }
+`
+
+const styles = {
+  boxshadow: '0px 1px 8px 0px rgba(0, 0, 0, 0.086), 0px 8px 24px 0px rgba(0, 0, 0, 0.1)',
+  linkEase: linkEase
+}
 
 
 /*==============================================================================
@@ -249,19 +285,33 @@ injectGlobal`
     box-sizing: inherit;
   }
   .mega-size {
+    font-family: ${fonts.header};
+    font-weight: 700;
     ${mega}
   }
   h1,
   .hero-size {
+    font-family: ${fonts.header};
+    font-weight: 700;
     ${hero}
   }
   h2,
   .heading-size {
+    font-family: ${fonts.header};
+    font-weight: 700;
     ${heading}
   }
-  h3, h4,
+  h3,
   .sub-heading-size {
+    font-family: ${fonts.header};
+    font-weight: 700;
     ${subHeading}
+  }
+  h4, h5, h6,
+  .small-heading-size {
+    font-family: ${fonts.header};
+    font-weight: 700;
+    ${regular}
   }
   *, 
   .regular-size {
@@ -280,8 +330,8 @@ injectGlobal`
 export const theme = {
   ...breakpointHelpers,
   colors,
-  styles,
   easings,
+  styles,
   margin,
   fonts,
   fontSizes

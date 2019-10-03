@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import { Media } from 'react-breakpoints'
+import Container from '../UI/Container'
 import MobileNav from './Mobile/MobileNav'
 import DesktopNav from './Desktop/DesktopNav'
-import Container from '../UI/Container'
 
 import Facebook from '../../img/social/facebook.svg'
 import Twitter from '../../img/social/twitter.svg'
@@ -211,7 +211,7 @@ class Navbar extends Component {
     return (
       <Fragment>
         <Header className={this.state.scrollState}>
-          <StyledContainer>
+          <StyledContainer maxWidth>
             <Media>
               {({ breakpoints, currentBreakpoint }) => 
                 breakpoints[currentBreakpoint] >= breakpoints.md ? (

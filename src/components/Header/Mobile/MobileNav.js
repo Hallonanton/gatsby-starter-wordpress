@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import Container from '../../UI/Container'
-import Logo from '../Logo'
-import VerticalNav from '../Navigation/VerticalNav'
+import VerticalNav from '../../Navigation/VerticalNav'
 import MenuButton from './MenuButton'
+import Logo from '../../UI/Logo'
 
 
 /*==============================================================================

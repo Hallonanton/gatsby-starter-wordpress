@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Logo from '../Logo'
-import HorizontalNav from '../Navigation/HorizontalNav'
+import HorizontalNav from '../../Navigation/HorizontalNav'
+import Logo from '../../UI/Logo'
 
 
 /*==============================================================================

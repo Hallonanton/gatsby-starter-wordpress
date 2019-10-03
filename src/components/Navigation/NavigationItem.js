@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import AnimateHeight from 'react-animate-height'
 import styled from '@emotion/styled'
-import Link from '../../Link'
+import Link from '../Link'
 
 /*==============================================================================
   # Styles
@@ -25,9 +25,15 @@ export const Icon = styled('span')`
     width: 1.8rem;
     height: 1.8rem;
     object-fit: contain;
-    fill: ${({theme}) => theme.colors.text};
-    stroke: ${({theme}) => theme.colors.text};
     transition: all 450ms ${({theme}) => theme.easings.primary};
+
+    path,
+    circle,
+    rect {
+      fill: ${({theme}) => theme.colors.text} !important;
+      stroke: ${({theme}) => theme.colors.text} !important;
+      transition: all 450ms ${({theme}) => theme.easings.primary};
+    }
   }
 `
 
@@ -55,8 +61,12 @@ export const StyledLink = styled(Link)`
 
     ${Icon} {
       svg {
-        fill: ${({theme}) => theme.colors.primary};
-        stroke: ${({theme}) => theme.colors.primary};
+        path,
+        circle,
+        rect {
+          fill: ${({theme}) => theme.colors.primary} !important;
+          stroke: ${({theme}) => theme.colors.primary} !important;
+        }
       }
     }
   }
