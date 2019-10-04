@@ -24,10 +24,20 @@ class Provider extends Component {
 
   render () {
 
-    console.log( this.props.sections )
+    const { sections } = this.props
+    console.log( sections )
 
     return (
-      <Wrapper>Provider</Wrapper>
+      <Wrapper>
+        {sections && sections.length > 0 ? sections.map((section, i) => {
+
+          const Tag = section.sectionKey
+
+          return (
+            <Tag key={i} />
+          )
+        }) : null}
+      </Wrapper>
     )
   }
 }
