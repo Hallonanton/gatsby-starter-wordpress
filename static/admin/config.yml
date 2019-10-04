@@ -6,8 +6,8 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "setttings"
-    label: "Inställningar"
+  - label: "Inställningar"
+    name: "setttings"
     delete: false
     editor:
       preview: false
@@ -19,12 +19,14 @@ collections:
         fields:
           - {label: "Rubrik", name: "title", widget: "string"}
 
-  - name: "artiklar"
-    label: "Artiklar"
+  - label: "Artiklar"
     label_singular: "Artikel"
+    name: "artiklar"
     folder: "src/pages/artiklar"
     create: true
     slug: "{{slug}}"
+    meta:
+      - {label: "SEO Description", name: "description", widget: "text"}
     fields:
       - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "single-article"}
       - {label: "Rubrik", name: "title", widget: "string"}
@@ -33,37 +35,37 @@ collections:
       - {label: "Utvald bild", name: "featuredimage", widget: image}
       - {label: "Innehåll", name: "body", widget: "markdown"}
       - {label: "Kategorier", name: "categories", widget: "list"}
-    meta:
-      - {label: "SEO Description", name: "description", widget: "text"}
 
-  - name: "sidor"
-    label: "Sidor"
+  - label: "Sidor"
     label_singular: "Sida"
+    name: "sidor"
     folder: "src/pages/sidor"
     create: true
-    extension: md
     slug: '{{slug}}'
+    meta:
+      - {label: "SEO Description", name: "description", widget: "text"}
     fields:
       - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "single-page"}
       - {label: "Rubrik", name: "title", widget: "string"}
-      - label: "Home Section"
+      - label: "Sektioner"
+        label_singular: "Sektion"
         name: "sections"
         widget: "list"
         types:
-          - label: "Carousel"
-            name: "carousel"
+          - label: "Text"
+            name: "text"
             widget: object
             fields:
-              - {label: Header, name: header, widget: string, default: "Image Gallery"}
-              - {label: Template, name: template, widget: string, default: "carousel.html"}
-              - label: Images
-                name: images
-                widget: list
-                field: {label: Image, name: image, widget: image}
-          - label: "Spotlight"
-            name: "spotlight"
+              - {label: Rubrik, name: title, widget: string}
+          - label: "Nummer"
+            name: "number"
             widget: object
             fields:
-              - {label: Header, name: header, widget: string, default: "Spotlight"}
-              - {label: Template, name: template, widget: string, default: "spotlight.html"}
-              - {label: Text, name: text, widget: text, default: "Hello World"}
+              - {label: Nummer, name: number, widget: number}
+          - label: "Bild"
+            name: "image"
+            widget: object
+            fields:
+              - label: Bild
+                name: image
+                widget: image
