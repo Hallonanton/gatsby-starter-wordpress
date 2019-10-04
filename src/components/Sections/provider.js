@@ -1,19 +1,7 @@
-import React, { Component } from 'react'
-import styled from '@emotion/styled'
-
-import SectionText from './SectionText'
-import SectionNumber from './SectionNumber'
+import React, { Component, Fragment } from 'react'
 import SectionImage from './SectionImage'
-
-/*==============================================================================
-  # Styles
-==============================================================================*/
-
-const Wrapper = styled('div')`
-  width: 100%;
-  padding: 30px 0px;
-  text-align: center;
-`
+import SectionNumber from './SectionNumber'
+import SectionText from './SectionText'
 
 
 /*==============================================================================
@@ -22,26 +10,36 @@ const Wrapper = styled('div')`
 
 class Provider extends Component {
 
+  state = {
+    templates: {
+      SectionImage,
+      SectionNumber,
+      SectionText
+    }
+  }
+
+  getTemplate = (name) => {
+    return this.state.templates[name]
+  }
+
   render () {
 
     const { sections } = this.props
     console.log( sections )
 
     return (
-      <Wrapper>
+      <Fragment>
         {sections && sections.length > 0 ? sections.map((section, i) => {
 
-          const Tag = section.sectionKey
+          const Section = this.getTemplate('SectionText')
 
           return (
-            <Tag key={i} />
+            <Section key={i} />
           )
         }) : null}
-      </Wrapper>
+      </Fragment>
     )
   }
 }
 
 export default Provider
-
-
