@@ -27,6 +27,8 @@ const SinglePage = ({ data }) => {
 
   const { frontmatter } = data.markdownRemark
 
+  console.log( 'data', data )
+
   return (
     <Layout>
       <PageTemplate {...frontmatter} />
@@ -37,8 +39,8 @@ const SinglePage = ({ data }) => {
 export default SinglePage
 
 export const pageQuery = graphql`
-  query PageTemplate {
-    markdownRemark(frontmatter: {templateKey: {eq: "SinglePage"}}) {
+  query PageTemplate($id: String!) {
+    markdownRemark(id: { eq: $id }) {
     frontmatter {
       title
       sections {

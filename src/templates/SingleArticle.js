@@ -34,8 +34,8 @@ const SingleArticle = ({ data }) => {
 export default SingleArticle
 
 export const articleQuery = graphql`
-  query ArticlePostTemplate {
-    markdownRemark(frontmatter: {templateKey: {eq: "SingleArticle"}}) {
+  query ArticlePostTemplate($id: String!) {
+    markdownRemark(id: { eq: $id }) {
       frontmatter {
         title
       }
