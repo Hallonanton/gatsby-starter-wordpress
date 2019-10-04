@@ -54,16 +54,19 @@ collections:
         types:
           - label: "Text"
             name: "text"
+            typeKey: "section-text"
             widget: object
             fields:
               - {label: Rubrik, name: title, widget: string}
           - label: "Nummer"
             name: "number"
+            typeKey: "section-number"
             widget: object
             fields:
               - {label: Nummer, name: number, widget: number}
           - label: "Bild"
             name: "image"
+            typeKey: "section-image"
             widget: object
             fields:
               - label: Bild
