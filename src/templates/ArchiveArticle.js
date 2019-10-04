@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Layout from '../components/Layout/Layout'
 
-class CategoryRoute extends Component {
+class ArchiveArticle extends Component {
 
   render() {
 
@@ -12,3 +12,5 @@ class CategoryRoute extends Component {
     )
   }
 }
+
+export default ArchiveArticle

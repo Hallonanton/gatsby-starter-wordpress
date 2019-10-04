@@ -1,100 +1,43 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
-import { graphql, Link } from 'gatsby'
+import React, { Component } from 'react'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout/Layout'
-import Content, { HTMLContent } from '../components/Content'
+import Container from '../components/UI/Container'
+import { Mega } from '../components/UI/Headings'
 
-export const ArticlePostTemplate = ({
-  content,
-  contentComponent,
-  description,
-  tags,
-  title,
-  helmet,
-}) => {
-  const PostContent = contentComponent || Content
+export class ArticlePostTemplate extends Component {
 
-  return (
-    <section className="section">
-      {helmet || ''}
-      <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <p>{description}</p>
-            <PostContent content={content} />
-            {tags && tags.length ? (
-              <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="taglist">
-                  {tags.map(tag => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+  render() {
+
+    const { title } = this.props
+
+    return (
+      <Container>
+        
+        <Mega>{title}</Mega>
+
+      </Container>
+    )
+  }
 }
 
-ArticlePostTemplate.propTypes = {
-  content: PropTypes.node.isRequired,
-  contentComponent: PropTypes.func,
-  description: PropTypes.string,
-  title: PropTypes.string,
-  helmet: PropTypes.object,
-}
+const SingleArticle = ({ data }) => {
 
-const ArticlePost = ({ data }) => {
-  const { markdownRemark: post } = data
+  const { frontmatter } = data.markdownRemark
 
   return (
     <Layout>
-      <ArticlePostTemplate
-        content={post.html}
-        contentComponent={HTMLContent}
-        description={post.frontmatter.description}
-        helmet={
-          <Helmet titleTemplate="%s | Article">
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
-              name="description"
-              content={`${post.frontmatter.description}`}
-            />
-          </Helmet>
-        }
-        tags={post.frontmatter.tags}
-        title={post.frontmatter.title}
-      />
+      <ArticlePostTemplate {...frontmatter} />
     </Layout>
   )
 }
 
-ArticlePost.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.object,
-  }),
-}
+export default SingleArticle
 
-export default ArticlePost
-
-export const pageQuery = graphql`
-  query BlogPostByID($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      id
-      html
+export const articleQuery = graphql`
+  query ArticlePostTemplate {
+    markdownRemark(frontmatter: {templateKey: {eq: "SingleArticle"}}) {
       frontmatter {
         title
-        description
       }
     }
   }

@@ -1,14 +1,11 @@
-import React, { Component } from 'react'
-import Layout from '../../components/Layout/Layout'
+import React from 'react'
+import ArchiveArticle from '../../templates/ArchiveArticle'
 
-class BlogIndexPage extends Component {
-  render() {
-    return (
-      <Layout>
-        ArtikelArkiv
-      </Layout>
-    )
-  }
+
+const CategoryArchive = ({ props }) => {
+	return (
+		<ArchiveArticle {...props} /> 
+	)
 }
 
-export default BlogIndexPage
+export default CategoryArchive

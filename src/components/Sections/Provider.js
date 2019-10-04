@@ -25,7 +25,6 @@ class Provider extends Component {
   render () {
 
     const { sections } = this.props
-    console.log( sections )
 
     return (
       <Fragment>
@@ -34,7 +33,7 @@ class Provider extends Component {
           const Section = this.getTemplate(section.sectionKey)
 
           return (
-            <Section key={i} />
+            <Section key={i} {...section} />
           )
         }) : null}
       </Fragment>
