@@ -1,5 +1,5 @@
 ---
-templateKey: blog-post
+templateKey: article-post
 title: Testin Testing
 date: 2015-11-17T15:04:10.000Z
 featuredpost: false
