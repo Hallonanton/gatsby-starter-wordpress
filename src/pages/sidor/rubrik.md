@@ -2,7 +2,7 @@
 templateKey: single-page
 title: Rubrik
 sections:
-  - title: En text
+  - title: Rubrik i section-text
     type: text
   - image: /img/blog-index.jpg
     type: image
