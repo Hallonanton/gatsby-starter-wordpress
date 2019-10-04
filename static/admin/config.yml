@@ -38,10 +38,12 @@ collections:
 
   - name: "sidor"
     label: "Sidor"
+    label_singular: "Sida"
     folder: "src/pages/"
     create: true
     slug: "{{slug}}"
     fields:
+      - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "single-page"}
       - label: "Modular Content Chunks"
         label_singular: "Modular Content Chunk"
         name: "chunk"
@@ -58,7 +60,6 @@ collections:
           - {label: "File", name: "file", widget: "file"}
           - {label: "Select", name: "select", widget: "select", options: ["a", "b", "c"]}
           - {label: "Select (Object)", name: "select_object", widget: "select", options: [{ label: "Chicago", value: "ORD" },{ label: "Paris", value: "CDG" },{ label: "Tokyo", value: "HND" }]}
-          - {label: "Related Post", name: "relation", widget: "relationKitchenSinkPost", collection: "posts", searchFields: ["title", "body"], valueField: "title"}
           - label: "Profile"
             name: "profile"
             widget: "object"
