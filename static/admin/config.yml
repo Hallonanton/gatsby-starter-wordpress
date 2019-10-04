@@ -17,7 +17,13 @@ collections:
         file: "src/data/settings.json"
         description: "General Site Settings"
         fields:
-          - {label: "Rubrik", name: "title", widget: "string"}
+          - label: "Startsida"
+            name: "homepage"
+            widget: "relation"
+            collection: "sidor"
+            searchFields: "title"
+            valueField: "title"
+            displayFields: "title"
 
   - label: "Artiklar"
     label_singular: "Artikel"

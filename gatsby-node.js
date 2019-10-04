@@ -36,18 +36,26 @@ exports.createPages = ({ actions, graphql }) => {
 
     posts.forEach(edge => {
 
-      const id = edge.node.id
+      const { id } = edge.node
+      let { slug } = edge.node.fields
 
-      //Exclude settings pages from page creation
-      if ( !edge.node.fields.slug.includes('settings') ) {    
+      // Exclude settings pages from page creation
+      if ( !slug.includes('settings') ) {    
+
+        let { categories, templateKey } = edge.node.frontmatter
+
+        // If template is page, remove "sidor" directory from path
+        if ( templateKey === 'SinglePage' ) {
+          slug = slug.replace("/sidor", "")
+        }
 
         createPage({
-          path: edge.node.fields.slug,
-          categories: edge.node.frontmatter.categories,
+          path: slug,
+          categories: categories,
           component: path.resolve(
-            `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
+            `src/templates/${String(templateKey)}.js`
           ),
-          // additional data can be passed via context
+          // Additional data can be passed via context
           context: {
             id,
           },
