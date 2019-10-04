@@ -12,6 +12,7 @@ import InfoList from './InfoList'
 ==============================================================================*/
 
 const FooterWrapper = styled('footer')`
+  flex-shrink: 0;
   padding-top: 30px;
   padding-bottom: 30px;
 `

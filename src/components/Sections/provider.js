@@ -31,7 +31,7 @@ class Provider extends Component {
       <Fragment>
         {sections && sections.length > 0 ? sections.map((section, i) => {
 
-          const Section = this.getTemplate('SectionText')
+          const Section = this.getTemplate(section.sectionKey)
 
           return (
             <Section key={i} />
