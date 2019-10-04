@@ -36,14 +36,12 @@ collections:
     meta:
       - {label: "SEO Description", name: "description", widget: "text"}
 
-  - name: "pages"
+  - name: "sidor"
     label: "Sidor"
-    label_singular: "Sida"
-    files:
-      - file: "src/pages/index.md"
-        label: "Landing Page"
-        name: "index"
-        fields:
+    folder: "src/pages/"
+    create: true
+    slug: "{{slug}}"
+    fields:
       - label: "Modular Content Chunks"
         label_singular: "Modular Content Chunk"
         name: "chunk"
@@ -126,5 +124,3 @@ collections:
           - {label: "Image", name: "image", widget: "image"}
           - {label: "File", name: "file", widget: "file"}
           - {label: "Select", name: "select", widget: "select", options: ["a", "b", "c"]}
-        meta:
-          - {label: "SEO Description", name: "description", widget: "text"}
