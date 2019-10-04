@@ -39,7 +39,7 @@ collections:
   - name: "sidor"
     label: "Sidor"
     label_singular: "Sida"
-    folder: "src/pages/"
+    folder: "src/pages/sidor"
     create: true
     slug: "{{slug}}"
     fields:
@@ -49,7 +49,7 @@ collections:
         label_singular: "Modular Content Chunk"
         name: "chunk"
         widget: "list"
-        types:
+        fields:
           - {label: "Text", name: "text", widget: "text"}
           - {label: "String", name: "string", widget: "string"}
           - {label: "Boolean", name: "boolean", widget: "boolean"}
