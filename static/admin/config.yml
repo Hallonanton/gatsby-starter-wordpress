@@ -41,16 +41,29 @@ collections:
     label_singular: "Sida"
     folder: "src/pages/sidor"
     create: true
-    slug: "{{slug}}"
+    extension: md
+    slug: '{{slug}}'
     fields:
       - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "single-page"}
       - {label: "Rubrik", name: "title", widget: "string"}
-      - label: "Modular Content Chunks"
-        label_singular: "Modular Content Chunk"
-        name: "chunk"
+      - label: "Home Section"
+        name: "sections"
         widget: "list"
-        fields:
-          - {label: "Text", name: "text", widget: "text"}
-          - {label: "String", name: "string", widget: "string"}
-          - {label: "Boolean", name: "boolean", widget: "boolean"}
-          - {label: "Number", name: "number", widget: "number"}
+        types:
+          - label: "Carousel"
+            name: "carousel"
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string, default: "Image Gallery"}
+              - {label: Template, name: template, widget: string, default: "carousel.html"}
+              - label: Images
+                name: images
+                widget: list
+                field: {label: Image, name: image, widget: image}
+          - label: "Spotlight"
+            name: "spotlight"
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string, default: "Spotlight"}
+              - {label: Template, name: template, widget: string, default: "spotlight.html"}
+              - {label: Text, name: text, widget: text, default: "Hello World"}
