@@ -2,11 +2,14 @@
 templateKey: single-page
 title: Rubrik
 sections:
-  - title: Rubrik i section-text
+  - sectionKey: section-text
+    title: En rubrik
     type: text
+  - number: 13123
+    sectionKey: section-number
+    type: section-number
   - image: /img/blog-index.jpg
-    type: image
-  - number: 12313
-    type: number
+    sectionKey: section-image
+    type: section-image
 ---
 
