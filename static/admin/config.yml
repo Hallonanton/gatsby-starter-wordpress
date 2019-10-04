@@ -17,7 +17,7 @@ collections:
           - {label: "Rubrik", name: "title", widget: "string"}
           - {label: "Innehåll", name: "body", widget: "markdown"}
 
-  - name: "article"
+  - name: "artiklar"
     label: "Artiklar"
     folder: "src/pages/artiklar"
     create: true
