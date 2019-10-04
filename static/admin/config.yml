@@ -13,9 +13,7 @@ collections:
         label: "Generella inställningar"
         name: "general-settings"
         fields:
-          - {label: "Mall", name: "templateKey", widget: "hidden", default: "settings-page"}
           - {label: "Rubrik", name: "title", widget: "string"}
-          - {label: "Innehåll", name: "body", widget: "markdown"}
 
   - name: "artiklar"
     label: "Artiklar"
@@ -23,9 +21,13 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Mall", name: "templateKey", widget: "hidden", default: "article-post"}
+      - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "single-article"}
       - {label: "Rubrik", name: "title", widget: "string"}
-      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Publiceringsdatum", name: "date", widget: "datetime"}
+      - {label: "Beskrivning", name: "description", widget: "text"}
+      - {label: "Utvald bild", name: "featuredimage", widget: image}
+      - {label: "Innehåll", name: "body", widget: "markdown"}
+      - {label: "Kategorier", name: "categories", widget: "list"}
 
   - name: "pages"
     label: "Pages"
@@ -34,7 +36,7 @@ collections:
         label: "Landing Page"
         name: "index"
         fields:
-          - {label: "Mall", name: "templateKey", widget: "hidden", default: "index-page"}
+          - {label: "Mall", name: "templateKey", widget: "hidden", default: "single-page"}
           - {label: Title, name: title, widget: string}
           - {label: Image, name: image, widget: image}
           - {label: Heading, name: heading, widget: string}

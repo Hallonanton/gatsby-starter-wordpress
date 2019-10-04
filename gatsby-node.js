@@ -16,7 +16,6 @@ exports.createPages = ({ actions, graphql }) => {
               slug
             }
             frontmatter {
-              tags
               templateKey
             }
           }
@@ -31,12 +30,20 @@ exports.createPages = ({ actions, graphql }) => {
 
     const posts = result.data.allMarkdownRemark.edges
 
+    /*
+     * Create pages for Sidor, Artiklar
+     */
+
     posts.forEach(edge => {
+
       const id = edge.node.id
+
+      //Exclude settings pages from page creation
       if ( !edge.node.fields.slug.includes('settings') ) {    
+
         createPage({
           path: edge.node.fields.slug,
-          tags: edge.node.frontmatter.tags,
+          categories: edge.node.frontmatter.categories,
           component: path.resolve(
             `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
           ),
@@ -45,29 +52,35 @@ exports.createPages = ({ actions, graphql }) => {
             id,
           },
         })
+
       }
     })
 
-    /*// Tag pages:
-    let tags = []
-    // Iterate through each post, putting all found tags into `tags`
+
+    /*
+     * Create category pages
+     */
+
+    /*let categories = []
+
+    // Iterate through each post, putting all found categories into `categories`
     posts.forEach(edge => {
-      if (_.get(edge, `node.frontmatter.tags`)) {
-        tags = tags.concat(edge.node.frontmatter.tags)
+      if (_.get(edge, `node.frontmatter.categories`)) {
+        categories = categories.concat(edge.node.frontmatter.categories)
       }
     })
-    // Eliminate duplicate tags
-    tags = _.uniq(tags)
+    // Eliminate duplicate categories
+    categories = _.uniq(categories)
 
-    // Make tag pages
-    tags.forEach(tag => {
-      const tagPath = `/tags/${_.kebabCase(tag)}/`
+    // Make category pages
+    categories.forEach(category => {
+      const categoryPath = `/kategori/${_.kebabCase(category)}/`
 
       createPage({
         path: tagPath,
-        component: path.resolve(`src/templates/tags.js`),
+        component: path.resolve(`src/templates/categories.js`),
         context: {
-          tag,
+          category,
         },
       })
     })*/
