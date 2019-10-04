@@ -37,7 +37,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query PageTemplate {
-    markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+    markdownRemark(frontmatter: { templateKey: { eq: "single-page" } }) {
       frontmatter {
         title
         image {

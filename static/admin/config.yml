@@ -8,15 +8,20 @@ public_folder: /img
 collections:
   - name: "setttings"
     label: "Inställningar"
+    delete: false
+    editor:
+      preview: false
     files:
-      - file: "src/pages/settings/index.md"
-        label: "Generella inställningar"
-        name: "general-settings"
+      - name: "general-settings"
+        label: "Sidinställningar"
+        file: "src/data/settings.json"
+        description: "General Site Settings"
         fields:
           - {label: "Rubrik", name: "title", widget: "string"}
 
   - name: "artiklar"
     label: "Artiklar"
+    label_singular: "Artikel"
     folder: "src/pages/artiklar"
     create: true
     slug: "{{slug}}"
@@ -28,20 +33,98 @@ collections:
       - {label: "Utvald bild", name: "featuredimage", widget: image}
       - {label: "Innehåll", name: "body", widget: "markdown"}
       - {label: "Kategorier", name: "categories", widget: "list"}
+    meta:
+      - {label: "SEO Description", name: "description", widget: "text"}
 
   - name: "pages"
-    label: "Pages"
+    label: "Sidor"
+    label_singular: "Sida"
     files:
       - file: "src/pages/index.md"
         label: "Landing Page"
         name: "index"
         fields:
-          - {label: "Mall", name: "templateKey", widget: "hidden", default: "single-page"}
-          - {label: Title, name: title, widget: string}
-          - {label: Image, name: image, widget: image}
-          - {label: Heading, name: heading, widget: string}
-          - {label: Subheading, name: subheading, widget: string}
-          - {label: Mainpitch, name: mainpitch, widget: object, fields: [{label: Title, name: title, widget: string}, {label: Description, name: description, widget: text}]}
-          - {label: Description, name: description, widget: string}
-          - {label: Intro, name: intro, widget: object, fields: [{label: Heading, name: heading, widget: string}, {label: Description, name: description, widget: text}, {label: Blurbs, name: blurbs, widget: list, fields: [{label: Image, name: image, widget: image}, {label: Text, name: text, widget: text}]}]}
-          - {label: Main, name: main, widget: object, fields: [{label: Heading, name: heading, widget: string}, {label: Description, name: description, widget: text}, {label: Image1, name: image1, widget: object, fields: [{label: Image, name: image, widget: image}, {label: Alt, name: alt, widget: string}]}, {label: Image2, name: image2, widget: object, fields: [{label: Image, name: image, widget: image}, {label: Alt, name: alt, widget: string}]}, {label: Image3, name: image3, widget: object, fields: [{label: Image, name: image, widget: image}, {label: Alt, name: alt, widget: string}]}]}
+      - label: "Modular Content Chunks"
+        label_singular: "Modular Content Chunk"
+        name: "chunk"
+        widget: "list"
+        types:
+          - {label: "Text", name: "text", widget: "text"}
+          - {label: "String", name: "string", widget: "string"}
+          - {label: "Boolean", name: "boolean", widget: "boolean"}
+          - {label: "Number", name: "number", widget: "number"}
+          - {label: "Markdown", name: "markdown", widget: "markdown"}
+          - {label: "Datetime", name: "datetime", widget: "datetime"}
+          - {label: "Date", name: "date", widget: "date"}
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "File", name: "file", widget: "file"}
+          - {label: "Select", name: "select", widget: "select", options: ["a", "b", "c"]}
+          - {label: "Select (Object)", name: "select_object", widget: "select", options: [{ label: "Chicago", value: "ORD" },{ label: "Paris", value: "CDG" },{ label: "Tokyo", value: "HND" }]}
+          - {label: "Related Post", name: "relation", widget: "relationKitchenSinkPost", collection: "posts", searchFields: ["title", "body"], valueField: "title"}
+          - label: "Profile"
+            name: "profile"
+            widget: "object"
+            fields:
+              - {label: "Public", name: "public", widget: "boolean", default: true}
+              - {label: "Name", name: "name", widget: "string"}
+              - label: "Birthdate"
+                name: "birthdate"
+                widget: "date"
+          - label: "List"
+            name: "list"
+            widget: "list"
+            fields:
+              - {label: "String", name: "string", widget: "string"}
+              - {label: "Boolean", name: "boolean", widget: "boolean"}
+              - {label: "Text", name: "text", widget: "text"}
+      - label: "List"
+        name: "list"
+        widget: "list"
+        fields:
+          - {label: "String", name: "string", widget: "string"}
+          - {label: "Boolean", name: "boolean", widget: "boolean"}
+          - {label: "Text", name: "text", widget: "text"}
+          - {label: "Number", name: "number", widget: "number"}
+          - {label: "Markdown", name: "markdown", widget: "markdown"}
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "File", name: "file", widget: "file"}
+          - {label: "Select", name: "select", widget: "select", options: ["a", "b", "c"]}
+      - label: "Related Post"
+        name: "post"
+        widget: "relationKitchenSinkPost"
+        collection: "posts"
+        searchFields: ["title", "body"]
+        valueField: "title"
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Boolean", name: "boolean", widget: "boolean", default: true}
+      - {label: "Text", name: "text", widget: "text"}
+      - {label: "Number", name: "number", widget: "number"}
+      - {label: "Markdown", name: "markdown", widget: "markdown"}
+      - {label: "Datetime", name: "datetime", widget: "datetime"}
+      - {label: "Date", name: "date", widget: "date"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "File", name: "file", widget: "file"}
+      - {label: "Select", name: "select", widget: "select", options: ["a", "b", "c"]}
+      - {label: "Hidden", name: "hidden", widget: "hidden", default: "hidden"}
+      - label: "Object"
+        name: "object"
+        widget: "object"
+        fields:
+          - label: "Related Post"
+            name: "post"
+            widget: "relationKitchenSinkPost"
+            collection: "posts"
+            searchFields: ["title", "body"]
+            valueField: "title"
+          - {label: "String", name: "string", widget: "string"}
+          - {label: "Boolean", name: "boolean", widget: "boolean", default: false}
+          - {label: "Text", name: "text", widget: "text"}
+          - {label: "Number", name: "number", widget: "number"}
+          - {label: "Markdown", name: "markdown", widget: "markdown"}
+          - {label: "Datetime", name: "datetime", widget: "datetime"}
+          - {label: "Date", name: "date", widget: "date"}
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "File", name: "file", widget: "file"}
+          - {label: "Select", name: "select", widget: "select", options: ["a", "b", "c"]}
+        meta:
+          - {label: "SEO Description", name: "description", widget: "text"}

@@ -25,7 +25,6 @@ export const categoryPageQuery = graphql`
     }
     allMarkdownRemark(
       limit: 1000
-      filter: { frontmatter: { categories: { in: [$category] } } }
     ) {
       totalCount
       edges {
