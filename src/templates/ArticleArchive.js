@@ -8,7 +8,7 @@ class CategoryRoute extends Component {
 
     return (
       <Layout>
-        KategoriTemplate
+        Arkiv
       </Layout>
     )
   }

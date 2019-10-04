@@ -18,6 +18,7 @@ exports.createPages = ({ actions, graphql }) => {
             frontmatter {
               templateKey
               title
+              categories
             }
           }
         }
@@ -36,7 +37,14 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    const posts = result.data.allMarkdownRemark.edges
+    /*
+     * Variables
+     */
+
+    const { allDataJson, allMarkdownRemark } = result.data
+    const hompage = allDataJson.edges[0].node.homepage
+    const posts = allMarkdownRemark.edges
+    let categories = []
 
     /*
      * Create pages for Sidor, Artiklar
@@ -47,14 +55,26 @@ exports.createPages = ({ actions, graphql }) => {
       const { id } = edge.node
       let { slug } = edge.node.fields
 
+      // Save categories for later use
+      if (_.get(edge, `node.frontmatter.categories`)) {
+        categories = categories.concat(edge.node.frontmatter.categories)
+      }
+
       // Exclude settings pages from page creation
       if ( !slug.includes('settings') ) {    
 
-        let { categories, templateKey } = edge.node.frontmatter
+        let { categories, templateKey, title } = edge.node.frontmatter
 
         // If template is page, remove "sidor" directory from path
         if ( templateKey === 'SinglePage' ) {
-          slug = slug.replace("/sidor", "")
+
+          if ( title === hompage ) {
+            slug = "/"
+
+          } else {
+            slug = slug.replace("/sidor", "")
+
+          }
         }
 
         createPage({
@@ -77,29 +97,24 @@ exports.createPages = ({ actions, graphql }) => {
      * Create category pages
      */
 
-    /*let categories = []
+     if ( categories.length > 0 ) {
 
-    // Iterate through each post, putting all found categories into `categories`
-    posts.forEach(edge => {
-      if (_.get(edge, `node.frontmatter.categories`)) {
-        categories = categories.concat(edge.node.frontmatter.categories)
-      }
-    })
-    // Eliminate duplicate categories
-    categories = _.uniq(categories)
+      // Eliminate duplicate categories
+      categories = _.uniq(categories)
 
-    // Make category pages
-    categories.forEach(category => {
-      const categoryPath = `/kategori/${_.kebabCase(category)}/`
+      // Make category pages
+      categories.forEach(category => {
+        const categoryPath = `/artiklar/${_.kebabCase(category)}/`
 
-      createPage({
-        path: tagPath,
-        component: path.resolve(`src/templates/categories.js`),
-        context: {
-          category,
-        },
+        createPage({
+          path: categoryPath,
+          component: path.resolve(`src/templates/ArchiveArticle.js`),
+          context: {
+            category,
+          },
+        })
       })
-    })*/
+     }
 
 
   })
