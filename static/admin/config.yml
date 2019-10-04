@@ -22,7 +22,7 @@ collections:
             widget: "relation"
             collection: "sidor"
             searchFields: "title"
-            valueField: "title"
+            valueField: "slug"
             displayFields: "title"
 
   - label: "Artiklar"
