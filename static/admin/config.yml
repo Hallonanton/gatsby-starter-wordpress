@@ -25,8 +25,6 @@ collections:
     folder: "src/pages/artiklar"
     create: true
     slug: "{{slug}}"
-    meta:
-      - {label: "SEO Description", name: "description", widget: "text"}
     fields:
       - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "single-article"}
       - {label: "Rubrik", name: "title", widget: "string"}
@@ -42,8 +40,6 @@ collections:
     folder: "src/pages/sidor"
     create: true
     slug: '{{slug}}'
-    meta:
-      - {label: "SEO Description", name: "description", widget: "text"}
     fields:
       - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "single-page"}
       - {label: "Rubrik", name: "title", widget: "string"}
@@ -68,7 +64,7 @@ collections:
             name: "section-image"
             widget: object
             fields:
-               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "section-image"}
+              - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "section-image"}
               - label: Bild
                 name: image
                 widget: image
