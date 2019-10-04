@@ -17,7 +17,15 @@ exports.createPages = ({ actions, graphql }) => {
             }
             frontmatter {
               templateKey
+              title
             }
+          }
+        }
+      }
+      allDataJson {
+        edges {
+          node {
+            homepage
           }
         }
       }
