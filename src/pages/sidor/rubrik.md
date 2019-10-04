@@ -1,5 +1,5 @@
 ---
-templateKey: single-page
+templateKey: SinglePage
 title: Rubrik
 sections:
   - sectionKey: section-text

@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
-import SectionText from './SectionText'
-import SectionNumber from './SectionNumber'
-import SectionImage from './SectionImage'
-
 /*==============================================================================
   # Styles
 ==============================================================================*/
@@ -20,18 +16,16 @@ const Wrapper = styled('div')`
   # Component
 ==============================================================================*/
 
-class Provider extends Component {
+class SectionImage extends Component {
 
   render () {
 
-    console.log( this.props.sections )
-
     return (
-      <Wrapper>Provider</Wrapper>
+      <Wrapper>SectionImage</Wrapper>
     )
   }
 }
 
-export default Provider
+export default SectionImage
 
 

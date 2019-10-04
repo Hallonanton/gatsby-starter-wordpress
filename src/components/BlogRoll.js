@@ -71,7 +71,7 @@ export default () => (
     query={graphql`
       query BlogRollQuery {
         allMarkdownRemark(
-          filter: { frontmatter: { templateKey: { eq: "single-article" } } }
+          filter: { frontmatter: { templateKey: { eq: "SingleArticle" } } }
         ) {
           edges {
             node {
