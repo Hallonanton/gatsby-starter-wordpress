@@ -1,17 +1,32 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { withPrefix } from 'gatsby'
+import styled from '@emotion/styled'
 import Theme from './Theme'
 import useSiteMetadata from './SiteMetadata'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
+
+
+/*==============================================================================
+  # Styles
+==============================================================================*/
+
+const Main = styled('main')`
+  flex-grow: 1;
+`
+
+
+/*==============================================================================
+  # Component
+==============================================================================*/
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata()
   return (
     <Theme>
       <Helmet>
-        <html lang="en" />
+        <html lang="sv" />
         <title>{title}</title>
         <meta name="description" content={description} />
 
@@ -32,24 +47,23 @@ const TemplateWrapper = ({ children }) => {
           href={`${withPrefix('/')}img/favicon-16x16.png`}
           sizes="16x16"
         />
-
         <link
           rel="mask-icon"
           href={`${withPrefix('/')}img/safari-pinned-tab.svg`}
           color="#ff4400"
         />
-        <meta name="theme-color" content="#fff" />
 
+        <meta name="theme-color" content="#fff" />
         <meta property="og:type" content="business.business" />
         <meta property="og:title" content={title} />
         <meta property="og:url" content="/" />
-        <meta
-          property="og:image"
-          content={`${withPrefix('/')}img/og-image.jpg`}
-        />
+        <meta property="og:image" content={`${withPrefix('/')}img/og-image.jpg`} />
+
       </Helmet>
       <Header />
-      <main>{children}</main>
+      <Main>
+        {children}
+      </Main>
       <Footer />
     </Theme>
   )

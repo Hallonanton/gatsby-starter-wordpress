@@ -53,19 +53,22 @@ collections:
         widget: "list"
         types:
           - label: "Text"
-            name: "section-text"
+            name: "text"
             widget: object
             fields:
+              - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "section-text"}
               - {label: Rubrik, name: title, widget: string}
           - label: "Nummer"
             name: "section-number"
             widget: object
             fields:
+              - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "section-number"}
               - {label: Nummer, name: number, widget: number}
           - label: "Bild"
             name: "section-image"
             widget: object
             fields:
+               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "section-image"}
               - label: Bild
                 name: image
                 widget: image

@@ -263,9 +263,16 @@ injectGlobal`
     color: ${colors.white};
   }
   html, 
-  body {
+  body,
+  #___gatsby,
+  #gatsby-focus-wrapper {
+    height: 100%;
     margin: 0px;
     padding: 0px;
+  }
+  #gatsby-focus-wrapper {
+    display: flex;
+    flex-direction: column;
   }
   html {
     box-sizing: border-box;
