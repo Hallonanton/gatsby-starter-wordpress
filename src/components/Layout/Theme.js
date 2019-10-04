@@ -291,6 +291,9 @@ injectGlobal`
   *, *:before, *:after {
     box-sizing: inherit;
   }
+  img {
+    max-width: 100%;
+  }
   .mega-size {
     font-family: ${fonts.header};
     font-weight: 700;

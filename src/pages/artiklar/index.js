@@ -23,19 +23,15 @@ export default () => (
     query={graphql`
       query ArchiveQuery {
         allMarkdownRemark(
-          filter: { frontmatter: { templateKey: { eq: "SingleArticle" } } }
+          filter: { 
+          	frontmatter: { 
+          		templateKey: { eq: "SingleArticle" } 
+	          } 
+	        }
         ) {
           edges {
             node {
-              excerpt(pruneLength: 400)
-              id
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                templateKey
-              }
+              ...ArticleCardFragment
             }
           }
         }

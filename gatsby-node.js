@@ -44,7 +44,7 @@ exports.createPages = ({ actions, graphql }) => {
     const { allDataJson, allMarkdownRemark } = result.data
     const hompage = allDataJson.edges[0].node.homepage
     const posts = allMarkdownRemark.edges
-    let categories = []
+    let allCategories = []
 
     /*
      * Create pages for Sidor, Artiklar
@@ -57,7 +57,7 @@ exports.createPages = ({ actions, graphql }) => {
 
       // Save categories for later use
       if (_.get(edge, `node.frontmatter.categories`)) {
-        categories = categories.concat(edge.node.frontmatter.categories)
+        allCategories = allCategories.concat(edge.node.frontmatter.categories)
       }
 
       // Exclude settings pages from page creation
@@ -80,10 +80,8 @@ exports.createPages = ({ actions, graphql }) => {
         createPage({
           path: slug,
           categories: categories,
-          component: path.resolve(
-            `src/templates/${String(templateKey)}.js`
-          ),
-          // Additional data can be passed via context
+          component: path.resolve(`src/templates/${String(templateKey)}.js`),
+          // Additional data can be passed via context to be used in graphql queries
           context: {
             id,
           },
@@ -97,18 +95,19 @@ exports.createPages = ({ actions, graphql }) => {
      * Create category pages
      */
 
-     if ( categories.length > 0 ) {
+     if ( allCategories.length > 0 ) {
 
       // Eliminate duplicate categories
-      categories = _.uniq(categories)
+      allCategories = _.uniq(allCategories)
 
       // Make category pages
-      categories.forEach(category => {
+      allCategories.forEach(category => {
         const categoryPath = `/artiklar/${_.kebabCase(category)}/`
 
         createPage({
           path: categoryPath,
           component: path.resolve(`src/templates/ArchiveArticle.js`),
+          // Additional data can be passed via context to be used in graphql queries
           context: {
             category,
           },
