@@ -46,7 +46,6 @@ export const pageQuery = graphql`
       sections {
         sectionKey
         title
-        number
         image {
           name
         }

@@ -60,17 +60,55 @@ collections:
             fields:
               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionText"}
               - {label: "Rubrik", name: "title", widget: "string"}
-          - label: "Nummer"
-            name: "number"
+              - {label: "Text", name: "textBody", widget: "markdown"}
+          - label: "Bild med text"
+            name: "imageText"
             widget: "object"
             fields:
-              - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionNumber"}
-              - {label: "Nummer", name: "number", widget: "number"}
+              - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionImageText"}
+              - {label: "Bild", name: "image", widget: "image"}
+              - label: "Bildposition"
+                name: "alignment"
+                widget: "select"
+                options:
+                  - { label: "Bild till vänster", value: "left" }
+                  - { label: "Bild till höger", value: "right" }
+                default: "left"
+              - {label: "Rubrik", name: "title", widget: "string"}
+              - {label: "Text", name: "text", widget: "text"}
+              - label: "Länk"
+                name: "link"
+                widget: "object"
+                fields: 
+                  - {label: "Länktext", name: "title", widget: "string"}
+                  - {label: "Url", name: "to", widget: "string"}
           - label: "Bild"
             name: "image"
             widget: "object"
             fields:
               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionImage"}
-              - label: "Bild"
-                name: "image"
-                widget: "image"
+              - {label: "Bild", name: "image", widget: "image"}
+          - label: "Artiklar"
+            name: "articles"
+            widget: "object"
+            fields:
+              - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionArticles"}
+              - {label: "Rubrik", name: "title", widget: "string"}
+              - {label: "Kategorinamn", name: "category", widget: "string"}
+          - label: "Textkort"
+            name: "textCards"
+            widget: "object"
+            fields:
+              - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionTextCards"}
+              - label: "Kort"
+                name: "cards"
+                widget: "list"
+                fields: 
+                  - {label: "Rubrik", name: "title", widget: "string"}
+                  - {label: "Text", name: "text", widget: "text"}
+                  - label: "Länk"
+                    name: "link"
+                    widget: "object"
+                    fields: 
+                      - {label: "Länktext", name: "title", widget: "string"}
+                      - {label: "Url", name: "to", widget: "string"}

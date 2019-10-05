@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react'
+import SectionArticles from './SectionArticles'
 import SectionImage from './SectionImage'
-import SectionNumber from './SectionNumber'
+import SectionImageText from './SectionImageText'
 import SectionText from './SectionText'
+import SectionTextCards from './SectionTextCards'
 
 
 /*==============================================================================
@@ -12,9 +14,11 @@ class Provider extends Component {
 
   state = {
     templates: {
+      SectionArticles,
       SectionImage,
-      SectionNumber,
-      SectionText
+      SectionImageText,
+      SectionText,
+      SectionTextCards
     }
   }
 

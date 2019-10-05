@@ -26,7 +26,7 @@ export const ArticleCardFragment = graphql`
 export const ArticlePageFragment = graphql`
   fragment ArticlePageFragment on MarkdownRemark {
     id
-    rawMarkdownBody
+    html
     frontmatter {
       title
       categories

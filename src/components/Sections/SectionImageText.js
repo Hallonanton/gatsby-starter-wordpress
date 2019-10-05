@@ -16,16 +16,16 @@ const Wrapper = styled('div')`
   # Component
 ==============================================================================*/
 
-class SectionNumber extends Component {
+class SectionImageText extends Component {
 
   render () {
 
     return (
-      <Wrapper>SectionNumber</Wrapper>
+      <Wrapper>SectionImageText</Wrapper>
     )
   }
 }
 
-export default SectionNumber
+export default SectionImageText
 
 

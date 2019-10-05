@@ -47,7 +47,7 @@ export class ArticlePostTemplate extends Component {
 
   render() {
 
-    const { categories, title, date, description, featuredimage, rawMarkdownBody } = this.props
+    const { categories, title, date, description, featuredimage, html } = this.props
 
     return (
       <StyledContainer>
@@ -77,7 +77,7 @@ export class ArticlePostTemplate extends Component {
           }}
         />
 
-        <StyledText content={rawMarkdownBody} />
+        <StyledText replace={false} content={html} />
 
       </StyledContainer>
     )
@@ -86,12 +86,12 @@ export class ArticlePostTemplate extends Component {
 
 const SingleArticle = ({ data }) => {
 
-  const { rawMarkdownBody, frontmatter } = data.markdownRemark
+  const { html, frontmatter } = data.markdownRemark
   const posts = data.allMarkdownRemark.edges
 
   return (
     <Layout>
-      <ArticlePostTemplate rawMarkdownBody={rawMarkdownBody} {...frontmatter} />
+      <ArticlePostTemplate html={html} {...frontmatter} />
 
       <StyledContainer>
 
