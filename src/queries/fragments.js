@@ -10,7 +10,7 @@ export const ArticleCardFragment = graphql`
     }
     frontmatter {
       title
-      date
+      date(formatString: "YYYY-MM-DD")
       description
       featuredimage {
         childImageSharp {
@@ -23,3 +23,22 @@ export const ArticleCardFragment = graphql`
   }
 `
 
+export const ArticlePageFragment = graphql`
+  fragment ArticlePageFragment on MarkdownRemark {
+    id
+    rawMarkdownBody
+    frontmatter {
+      title
+      categories
+      date(formatString: "YYYY-MM-DD")
+      description
+      featuredimage {
+        childImageSharp {      
+          fluid(maxWidth: 1200, quality: 100) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  }
+`
