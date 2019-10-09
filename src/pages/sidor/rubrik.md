@@ -46,5 +46,29 @@ sections:
     sectionKey: SectionArticles
     title: Artiklar
     type: articles
+  - image: /img/products-grid3.jpg
+    sectionKey: SectionImage
+    type: image
+  - cards:
+      - text: >-
+          Nunc sit amet pellentesque ligula. Orci varius natoque penatibus et
+          magnis dis parturient montes, nascetur ridiculus mus. Suspendisse eget
+          dictum nulla.
+        title: Textkort 1
+      - link:
+          title: Länk
+          to: /artiklar
+        text: >-
+          Nunc sit amet pellentesque ligula. Orci varius natoque penatibus et
+          magnis dis parturient montes, nascetur ridiculus mus. Suspendisse eget
+          dictum nulla.
+        title: Textkort 2
+      - text: >-
+          Nunc sit amet pellentesque ligula. Orci varius natoque penatibus et
+          magnis dis parturient montes, nascetur ridiculus mus. Suspendisse eget
+          dictum nulla.
+        title: Textkort 3
+    sectionKey: SectionTextCards
+    type: textCards
 ---
 
