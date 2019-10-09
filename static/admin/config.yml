@@ -35,10 +35,10 @@ collections:
       - {label: "Nyckel", name: "templateKey", widget: "hidden", default: "SingleArticle"}
       - {label: "Rubrik", name: "title", widget: "string"}
       - {label: "Publiceringsdatum", name: "date", widget: "datetime"}
-      - {label: "Beskrivning", name: "description", widget: "text"}
+      - {label: "Beskrivning", name: "description", widget: "text", required: false}
       - {label: "Utvald bild", name: "featuredimage", widget: image}
       - {label: "Innehåll", name: "body", widget: "markdown"}
-      - {label: "Kategorier", name: "categories", widget: "list"}
+      - {label: "Kategorier", name: "categories", widget: "list", required: false}
 
   - label: "Sidor"
     label_singular: "Sida"
@@ -53,10 +53,12 @@ collections:
         label_singular: "Sektion"
         name: "sections"
         widget: "list"
+        required: false
         types:
           - label: "Text"
             name: "text"
             widget: "object"
+            required: false
             fields:
               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionText"}
               - {label: "Rubrik", name: "title", widget: "string"}
@@ -64,6 +66,7 @@ collections:
           - label: "Bild med text"
             name: "imageText"
             widget: "object"
+            required: false
             fields:
               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionImageText"}
               - {label: "Bild", name: "image", widget: "image"}
@@ -79,18 +82,21 @@ collections:
               - label: "Länk"
                 name: "link"
                 widget: "object"
+                required: false
                 fields: 
-                  - {label: "Länktext", name: "title", widget: "string"}
-                  - {label: "Url", name: "to", widget: "string"}
+                  - {label: "Länktext", name: "title", widget: "string", required: false}
+                  - {label: "Url", name: "to", widget: "string", required: false}
           - label: "Bild"
             name: "image"
             widget: "object"
+            required: false
             fields:
               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionImage"}
               - {label: "Bild", name: "image", widget: "image"}
           - label: "Artiklar"
             name: "articles"
             widget: "object"
+            required: false
             fields:
               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionArticles"}
               - {label: "Rubrik", name: "title", widget: "string"}
@@ -98,6 +104,7 @@ collections:
           - label: "Textkort"
             name: "textCards"
             widget: "object"
+            required: false
             fields:
               - {label: "Nyckel", name: "sectionKey", widget: "hidden", default: "SectionTextCards"}
               - label: "Kort"
@@ -105,10 +112,11 @@ collections:
                 widget: "list"
                 fields: 
                   - {label: "Rubrik", name: "title", widget: "string"}
-                  - {label: "Text", name: "text", widget: "text"}
+                  - {label: "Text", name: "text", widget: "text", }
                   - label: "Länk"
                     name: "link"
                     widget: "object"
+                    required: false
                     fields: 
-                      - {label: "Länktext", name: "title", widget: "string"}
-                      - {label: "Url", name: "to", widget: "string"}
+                      - {label: "Länktext", name: "title", widget: "string", required: false}
+                      - {label: "Url", name: "to", widget: "string", required: false}

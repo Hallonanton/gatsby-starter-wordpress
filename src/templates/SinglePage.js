@@ -41,16 +41,16 @@ export default SinglePage
 export const pageQuery = graphql`
   query PageTemplate($id: String!) {
     markdownRemark(id: { eq: $id }) {
-    frontmatter {
-      title
-      sections {
-        sectionKey
+      frontmatter {
         title
-        image {
-          name
+        sections {
+          sectionKey
+          title
+          image {
+            name
+          }
         }
       }
     }
-  }
   }
 `
