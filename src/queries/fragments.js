@@ -1,5 +1,40 @@
 import { graphql } from "gatsby"
 
+export const PageSectionsFragment = graphql`
+  fragment PageSectionsFragment on MarkdownRemark {
+    frontmatter {
+      title
+      sections {
+        sectionKey
+        title
+        textBody
+        alignment
+        link {
+          title
+          to
+        }
+        text
+        category
+        cards {
+          text
+          title
+          link {
+            title
+            to
+          }
+        }
+        image {
+          childImageSharp {      
+            fluid(maxWidth: 1200, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 export const ArticleCardFragment = graphql`
   fragment ArticleCardFragment on MarkdownRemark {
     id
