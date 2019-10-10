@@ -15,6 +15,7 @@ sections:
     type: text
   - alignment: left
     image: /img/blog-index.jpg
+    imageHalf: /img/blog-index.jpg
     link:
       title: Länk
       to: /artiklar
@@ -31,6 +32,7 @@ sections:
     type: imageText
   - alignment: right
     image: /img/chemex.jpg
+    imageHalf: /img/chemex.jpg
     sectionKey: SectionImageText
     text: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
@@ -47,6 +49,7 @@ sections:
     title: Artiklar
     type: articles
   - image: /img/products-grid3.jpg
+    imageFull: /img/flavor_wheel.jpg
     sectionKey: SectionImage
     type: image
   - cards:
