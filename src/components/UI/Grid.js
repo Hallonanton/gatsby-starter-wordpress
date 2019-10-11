@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
+/*==============================================================================
+  # Styles
+==============================================================================*/
+
 const Wrapper = styled('div')`
   display: flex;
   flex-direction: column;
@@ -34,6 +38,10 @@ const Wrapper = styled('div')`
     padding-right: ${({ fullWidth }) => (fullWidth ? '0px' : '110px')};
   }
 `;
+
+/*==============================================================================
+  # Components
+==============================================================================*/
 
 const Container = ({ children, ...rest }) => {
   return <Wrapper {...rest}>{children}</Wrapper>;

@@ -23,7 +23,14 @@ export const PageSectionsFragment = graphql`
             to
           }
         }
-        image {
+        imageHalf {
+          childImageSharp {      
+            fluid(maxWidth: 600, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        imageFull {
           childImageSharp {      
             fluid(maxWidth: 1200, quality: 100) {
               ...GatsbyImageSharpFluid

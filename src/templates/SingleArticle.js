@@ -4,7 +4,7 @@ import { graphql, Link } from 'gatsby'
 import Img from "gatsby-image"
 import styled from '@emotion/styled'
 import Layout from '../components/Layout/Layout'
-import Container from '../components/UI/Container'
+import Container from '../components/UI/Grid'
 import { Mega, Heading } from '../components/UI/Headings'
 import Divider from '../components/UI/Divider'
 import Text from '../components/UI/Text'

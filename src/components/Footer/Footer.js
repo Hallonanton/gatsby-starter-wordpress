@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import HorizontalNav from '../Navigation/HorizontalNav'
 import { StyledLink } from '../Navigation/NavigationItem'
-import Container from '../UI/Container'
+import Container from '../UI/Grid'
 import Logo from '../UI/Logo'
 import InfoList from './InfoList'
 

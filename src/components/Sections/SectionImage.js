@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import Img from "gatsby-image"
 
 /*==============================================================================
   # Styles
@@ -20,8 +21,19 @@ class SectionImage extends Component {
 
   render () {
 
+    let { imageFull } = this.props
+
     return (
-      <Wrapper>SectionImage</Wrapper>
+      <Wrapper>
+        <Img 
+          fluid={imageFull.childImageSharp.fluid}
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '550px',
+          }}
+        />
+      </Wrapper>
     )
   }
 }

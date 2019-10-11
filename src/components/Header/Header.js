@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import { Media } from 'react-breakpoints'
-import Container from '../UI/Container'
+import Container from '../UI/Grid'
 import MobileNav from './Mobile/MobileNav'
 import DesktopNav from './Desktop/DesktopNav'
 
