@@ -44,7 +44,7 @@ sections:
       Suspendisse eget dictum nulla.
     title: Bild till höger
     type: imageText
-  - category: falvor
+  - category: flavor
     sectionKey: SectionArticles
     title: Artiklar
     type: articles
