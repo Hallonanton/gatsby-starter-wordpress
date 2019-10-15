@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import TextCard, { TextCardContainer } from '../UI/TextCard'
+
 
 /*==============================================================================
   # Styles
@@ -7,7 +9,7 @@ import styled from '@emotion/styled'
 
 const Wrapper = styled('div')`
   width: 100%;
-  padding: 30px 0px;
+  padding: 50px 0px;
   text-align: center;
 `
 
@@ -20,8 +22,16 @@ class SectionTextCards extends Component {
 
   render () {
 
+    let { cards } = this.props
+
+    if ( cards.length < 0 ) { return false }
+
     return (
-      <Wrapper>SectionTextCards</Wrapper>
+      <Wrapper>
+        <TextCardContainer>
+          {cards.map((card, i) => <TextCard key={i} {...card} />)}
+        </TextCardContainer>
+      </Wrapper>
     )
   }
 }

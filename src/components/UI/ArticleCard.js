@@ -8,7 +8,7 @@ import { SubHeading } from './Headings'
   # Styles
 ==============================================================================*/
 
-const CardContainer = styled('ul')`
+export const ArticleCardContainer = styled('ul')`
   display: grid;
   grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
   margin: 30px -15px -15px;
@@ -58,12 +58,6 @@ const Text = styled('p')`
 /*==============================================================================
   # Component
 ==============================================================================*/
-
-export const ArticleCardContainer = ({children}) => (
-  <CardContainer>
-    {children}
-  </CardContainer>
-)
 
 
 class ArticleCard extends Component {

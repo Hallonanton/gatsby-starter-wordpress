@@ -6,6 +6,7 @@ import Theme from './Theme'
 import useSiteMetadata from './SiteMetadata'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
+import CookieConsent from './CookieConsent'
 
 
 /*==============================================================================
@@ -65,6 +66,7 @@ const TemplateWrapper = ({ children }) => {
         {children}
       </Main>
       <Footer />
+      <CookieConsent />
     </Theme>
   )
 }

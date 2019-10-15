@@ -22,19 +22,7 @@ export default () => (
   <StaticQuery
     query={graphql`
       query ArchiveQuery {
-        allMarkdownRemark(
-          filter: { 
-          	frontmatter: { 
-          		templateKey: { eq: "SingleArticle" } 
-	          } 
-	        }
-        ) {
-          edges {
-            node {
-              ...ArticleCardFragment
-            }
-          }
-        }
+        ...AllArticles
       }
     `}
     render={data => <ArchiveArticle data={data} />}

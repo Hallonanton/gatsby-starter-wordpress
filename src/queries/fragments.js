@@ -42,6 +42,24 @@ export const PageSectionsFragment = graphql`
   }
 `
 
+export const AllArticles = graphql`
+  fragment AllArticles on Query {
+    allMarkdownRemark(
+      filter: { 
+        frontmatter: { 
+          templateKey: { eq: "SingleArticle" } 
+        } 
+      }
+    ) {
+      edges {
+        node {
+          ...ArticleCardFragment
+        }
+      }
+    }
+  }
+`
+
 export const ArticleCardFragment = graphql`
   fragment ArticleCardFragment on MarkdownRemark {
     id
@@ -52,6 +70,7 @@ export const ArticleCardFragment = graphql`
     }
     frontmatter {
       title
+      categories
       date(formatString: "YYYY-MM-DD")
       description
       featuredimage {
