@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { withPrefix } from 'gatsby'
-import Scrollbars from 'react-scrollbar';
 import styled from '@emotion/styled'
 import Theme from './Theme'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import CookieConsent from './CookieConsent'
+let ScrollArea = null
+
+if ( typeof document !== 'undefined' ) {
+  ScrollArea = require('react-scrollbar').default
+
+} else {
+  ScrollArea = require('react-scrollbar/dist/no-css').default
+
+}
 
 
 /*==============================================================================
@@ -88,7 +96,7 @@ class TemplateWrapper extends Component {
           <meta property="og:image" content={`${withPrefix('/')}img/og-image.jpg`} />
 
         </Helmet>
-        <Scrollbars
+        <ScrollArea
           ref={(r) => window.scrollbars = r}
           speed={1.2}
           onScroll={(values) => this.handleScroll(values)}
@@ -103,7 +111,7 @@ class TemplateWrapper extends Component {
           </Main>
           <Footer />
           <CookieConsent />
-        </Scrollbars>
+        </ScrollArea>
       </Theme>
     )
   }
