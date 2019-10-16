@@ -62,6 +62,7 @@ const Text = styled('p')`
 
 const StyledButton = styled(Button)`
   max-width: 200px;
+  text-align: center;
   
   ${({theme}) => theme.below.sm} {
     margin-top: 15px;
@@ -99,6 +100,9 @@ class CookieConsent extends Component {
 
   onAllow = (e) => {
     e.preventDefault()
+
+    console.log('ButtonWithLoading')
+
     this.hide()
   }
 
