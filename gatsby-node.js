@@ -23,7 +23,11 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
-      allDataJson {
+      allDataJson(
+        filter: {
+          homepage: {ne: null}
+        }
+      ) {
         edges {
           node {
             homepage
@@ -42,7 +46,7 @@ exports.createPages = ({ actions, graphql }) => {
      */
 
     const { allDataJson, allMarkdownRemark } = result.data
-    const hompage = allDataJson.edges[0].node.homepage
+    const homepage = allDataJson.edges[0].node.homepage
     const posts = allMarkdownRemark.edges
     let allCategories = []
 
@@ -68,7 +72,7 @@ exports.createPages = ({ actions, graphql }) => {
         // If template is page, remove "sidor" directory from path
         if ( templateKey === 'SinglePage' ) {
 
-          if ( title === hompage ) {
+          if ( title === homepage ) {
             slug = "/"
 
           } else {
