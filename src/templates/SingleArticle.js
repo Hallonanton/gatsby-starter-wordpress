@@ -30,7 +30,7 @@ const CategoryList = styled('div')`
 
 const Date = styled('span')`
   margin-top: 5px;
-  color: ${({theme}) => theme.colors.bgContrastMed};
+  color: ${({theme}) => theme.colors.bgContrast};
   ${({theme}) => theme.fontSizes.description}
 `
 

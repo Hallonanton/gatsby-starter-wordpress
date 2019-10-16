@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { darken } from 'polished'
+import Link from '../Link'
 
 /*==============================================================================
   # Styles
@@ -22,6 +23,7 @@ const disabledStyle = () => css`
 `;
 
 export const buttonStyle = ({ secondary, theme, disabled }) => css`
+  display: inline-block;
   width: 100%;
   padding: 15px 30px;
   border: none;
@@ -64,7 +66,7 @@ const Inner = styled('span')`
 	}
 `
 
-const Button = styled('button')`
+const Button = styled(Link)`
   ${buttonStyle}
 
   &:hover {

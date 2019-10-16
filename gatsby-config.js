@@ -81,6 +81,15 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-nprogress',
+      options: {
+        // Setting a color is optional.
+        color: '#2a6cf0',
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
         modulePath: `${__dirname}/src/cms/cms.js`,

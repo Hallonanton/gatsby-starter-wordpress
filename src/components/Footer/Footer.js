@@ -52,7 +52,7 @@ const DiscreetNav = styled(HorizontalNav)`
   }
 
   ${StyledLink} {
-    color: ${({theme}) => theme.colors.bgContrastMed};
+    color: ${({theme}) => theme.colors.bgContrast};
     ${({theme}) => theme.fontSizes.description}
     text-decoration: underline;
     transition: all 250ms ease;

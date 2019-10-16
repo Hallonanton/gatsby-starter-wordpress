@@ -19,15 +19,25 @@ const Row = styled('div')`
   align-items: center;
   margin-left: -15px;
   margin-right: -15px;
+
+  ${({theme}) => theme.below.md} {
+    flex-direction: column;
+  }
 `
 
 const Col = styled('div')`
-  width: 50%;
+  width: 100%;
   padding-left: 15px;
   padding-right: 15px;
   text-align: center;
 
+  &:first-child {
+    margin-bottom: 30px;
+  }
+
   ${({theme}) => theme.above.md} {
+    width: 50%;
+    margin-bottom: 0px;
     order: ${({order}) => order};
   }
 `

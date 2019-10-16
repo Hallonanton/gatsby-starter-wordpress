@@ -2,19 +2,11 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { withPrefix } from 'gatsby'
 import styled from '@emotion/styled'
+import { Scrollbars } from 'react-custom-scrollbars';
 import Theme from './Theme'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import CookieConsent from './CookieConsent'
-let ScrollArea = null
-
-if ( typeof document !== 'undefined' ) {
-  ScrollArea = require('react-scrollbar').default
-
-} else {
-  ScrollArea = require('react-scrollbar/dist/no-css').default
-
-}
 
 
 /*==============================================================================
@@ -25,17 +17,27 @@ const Main = styled('main')`
   flex-grow: 1;
 `
 
+const Thumb = styled('div')`
+  border-radius: 5px;
+  background-color: ${({theme}) => theme.colors.bgContrast};
+`
 
-const containerStyle = {
-  width: 8,
-  background: 'transparent'
-}
+const Track = styled('div')`
+  z-index: 100;
+`
 
-const scrollbarStyle = {
-  width: 6,
-  borderRadius: 2,
-  backgroundColor: '#CCC'
-}
+const TrackVertical = styled(Track)`
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+`
+
+const TrackHorizontal = styled(Track)`
+  right: 2px;
+  left: 2px;
+  bottom: 2px;
+`
+
 
 /*==============================================================================
   # Component
@@ -52,7 +54,8 @@ class TemplateWrapper extends Component {
 
   handleScroll = ( values ) => {
     if ( typeof document !== 'undefined' && document.scrollbar ) {
-      document.scrollbar.top = values.topPosition
+      document.scrollbar.top = values.scrollTop
+      document.scrollbar.left = values.scrollLeft
       document.dispatchEvent( document.scrollbar )
     }
   }
@@ -96,14 +99,16 @@ class TemplateWrapper extends Component {
           <meta property="og:image" content={`${withPrefix('/')}img/og-image.jpg`} />
 
         </Helmet>
-        <ScrollArea
-          ref={(r) => window.scrollbars = r}
-          speed={1.2}
-          onScroll={(values) => this.handleScroll(values)}
-          horizontalContainerStyle={containerStyle}
-          horizontalScrollbarStyle={scrollbarStyle}
-          verticalContainerStyle={containerStyle}
-          verticalScrollbarStyle={scrollbarStyle}
+        <Scrollbars
+          style={{ width: '100vw', height: '100vh' }}
+          onScrollFrame={this.handleScroll}
+          renderTrackVertical={({...props }) => <TrackVertical {...props} />}
+          renderTrackHorizontal={({...props }) => <TrackHorizontal {...props} />}
+          renderThumbVertical={({...props }) => <Thumb {...props} />}
+          renderThumbHorizontal={({...props }) => <Thumb {...props} />}
+          autoHide={true}
+          autoHideTimeout={1500}
+          autoHideDuration={300}
         >
           <Header />
           <Main>
@@ -111,7 +116,7 @@ class TemplateWrapper extends Component {
           </Main>
           <Footer />
           <CookieConsent />
-        </ScrollArea>
+        </Scrollbars>
       </Theme>
     )
   }

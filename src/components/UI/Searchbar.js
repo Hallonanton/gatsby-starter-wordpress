@@ -22,7 +22,7 @@ const SearchInput= styled('input')`
   box-shadow: none;
 
   &::placeholder {
-    color: ${({theme}) => theme.colors.bgContrastMed};
+    color: ${({theme}) => theme.colors.bgContrast};
     transition: all 250ms ${({theme}) => theme.easings.primary};
   }
 

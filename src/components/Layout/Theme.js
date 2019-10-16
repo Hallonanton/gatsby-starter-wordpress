@@ -36,7 +36,7 @@ colors.text = colors.black
 colors.bg = colors.white
 colors.bgContrastLower = '#F2F2F2'
 colors.bgContrastLow = '#D6D6D7'
-colors.bgContrastMed = '#D3D3D4'
+colors.bgContrast = '#D3D3D4'
 colors.bgContrastHigh = '#313135'
 colors.bgContrastHigher = '#1C1C21'
 colors.primary = colors.blue
@@ -262,18 +262,22 @@ injectGlobal`
     background: ${colors.primary}; 
     color: ${colors.white};
   }
-  html, 
+  ::-webkit-scrollbar {
+    min-width: 1px;
+    min-height: 1px;
+  }
+  /*html, 
   body,
   #___gatsby,
   #gatsby-focus-wrapper {
-    height: 100%;
+    min-height: 100%;
     margin: 0px;
     padding: 0px;
   }
   #gatsby-focus-wrapper {
     display: flex;
     flex-direction: column;
-  }
+  }*/
   html {
     box-sizing: border-box;
     //This reset makes it easier to use rem
