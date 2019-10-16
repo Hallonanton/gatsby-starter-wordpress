@@ -35,9 +35,21 @@ collections:
         description: "Header content"
         fields:
           - label: "Huvudmeny"
+            label_singular: "Länk"
             name: "mainmenu"
             widget: "list"
-            field: {label: Länk, name: link, widget: string}
+            required: false
+            fields:
+              - {label: "Titel", name: "title", widget: "string"} 
+              - {label: "Länk", name: "link", widget: "string"} 
+              - label: "Undermeny"
+                label_singular: "Länk"
+                name: "submenu"
+                widget: "list"
+                required: false
+                fields:
+                  - {label: "Titel", name: "title", widget: "string"} 
+                  - {label: "Länk", name: "link", widget: "string"}  
       - name: "footer-settings"
         label: "Footer"
         file: "src/data/footer.json"
@@ -46,7 +58,33 @@ collections:
           - label: "Meny"
             name: "footermenu"
             widget: "list"
-            field: {label: Länk, name: link, widget: string} 
+            required: false
+            fields:
+              - {label: "Rubrik", name: "title", widget: "string", required: false}
+              - label: "Innehåll"
+                name: "links"
+                widget: "list"
+                required: false
+                types:
+                  - label: "Text"
+                    name: "text"
+                    widget: "object"
+                    fields:
+                      - {label: "Text", name: "title", widget: "string"}
+                  - label: "Länk"
+                    name: "internal"
+                    widget: "object"
+                    fields:
+                      - {label: "Titel", name: "title", widget: "string"} 
+                      - {label: "Länk", name: "link", widget: "string"} 
+          - label: "Diskret meny"
+            label_singular: "Länk"
+            name: "bottommenu"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Titel", name: "title", widget: "string"} 
+              - {label: "Länk", name: "link", widget: "string"}
 
   - label: "Artiklar"
     label_singular: "Artikel"
