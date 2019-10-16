@@ -1,3 +1,9 @@
 {
-  "homepage": "Rubrik"
+  "homepage": "Rubrik",
+  "integritypage": "Sida nummer 2",
+  "socialmedia": {
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "twitter": "https://www.twitter.com/"
+  }
 }
