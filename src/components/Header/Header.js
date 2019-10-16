@@ -68,30 +68,16 @@ const StyledContainer = styled(Container)`
   # Component
 ==============================================================================*/
 
-const isIE11 =
-  typeof window !== 'undefined' &&
-  !!window.MSInputMethodContext &&
-  !!document.documentMode
-const scrollY = isIE11 ? 'pageYOffset' : 'scrollY'
-
 class Navbar extends Component {
 
   componentDidMount() {
     if ( this.state.hideOnScroll ) {
-      window.addEventListener('scroll', this.handleScroll);
-
-      this.setState(
-        {
-          scrollY: window[scrollY],
-          prevY: window[scrollY]
-        },
-        () => this.handleScroll()
-      )
+      window.addEventListener('scrollbar', this.handleScroll);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scrollbar', this.handleScroll)
   }
 
   state = {
@@ -104,7 +90,7 @@ class Navbar extends Component {
   }
 
   handleScroll = e => {  
-    const newPos = window[scrollY]
+    const newPos = document.scrollbar.top || 0
     const oldPos = this.state.scrollY
 
     let scrollState =

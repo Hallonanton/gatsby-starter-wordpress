@@ -23,7 +23,7 @@ class SectionImage extends Component {
 
     let { imageFull } = this.props
 
-    return (
+    return imageFull && imageFull.childImageSharp ? (
       <Wrapper>
         <Img 
           fluid={imageFull.childImageSharp.fluid}
@@ -34,7 +34,7 @@ class SectionImage extends Component {
           }}
         />
       </Wrapper>
-    )
+    ) : null
   }
 }
 

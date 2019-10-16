@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { withPrefix } from 'gatsby'
+import Scrollbars from 'react-scrollbar';
 import styled from '@emotion/styled'
 import Theme from './Theme'
-import useSiteMetadata from './SiteMetadata'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import CookieConsent from './CookieConsent'
@@ -18,57 +18,96 @@ const Main = styled('main')`
 `
 
 
+const containerStyle = {
+  width: 8,
+  background: 'transparent'
+}
+
+const scrollbarStyle = {
+  width: 6,
+  borderRadius: 2,
+  backgroundColor: '#CCC'
+}
+
 /*==============================================================================
   # Component
 ==============================================================================*/
 
-const TemplateWrapper = ({ children }) => {
-  const { title, description } = useSiteMetadata()
-  return (
-    <Theme>
-      <Helmet>
-        <html lang="sv" />
-        <title>{title}</title>
-        <meta name="description" content={description} />
+class TemplateWrapper extends Component {
+  
+  componentDidMount() {
+    document.scrollbar = new CustomEvent('scrollbar', { 
+      detail:   "Triggers when react-component scrollbar scrolls",
+      bubbles:  true
+    })
+  }
 
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href={`${withPrefix('/')}img/apple-touch-icon.png`}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href={`${withPrefix('/')}img/favicon-32x32.png`}
-          sizes="32x32"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href={`${withPrefix('/')}img/favicon-16x16.png`}
-          sizes="16x16"
-        />
-        <link
-          rel="mask-icon"
-          href={`${withPrefix('/')}img/safari-pinned-tab.svg`}
-          color="#ff4400"
-        />
+  handleScroll = ( values ) => {
+    if ( typeof document !== 'undefined' && document.scrollbar ) {
+      document.scrollbar.top = values.topPosition
+      document.dispatchEvent( document.scrollbar )
+    }
+  }
 
-        <meta name="theme-color" content="#fff" />
-        <meta property="og:type" content="business.business" />
-        <meta property="og:title" content={title} />
-        <meta property="og:url" content="/" />
-        <meta property="og:image" content={`${withPrefix('/')}img/og-image.jpg`} />
+  render () {
+    
+    return (
+      <Theme>
+        <Helmet>
+          <html lang="sv" />
+          <title></title>
+          <meta name="description" content="" />
 
-      </Helmet>
-      <Header />
-      <Main>
-        {children}
-      </Main>
-      <Footer />
-      <CookieConsent />
-    </Theme>
-  )
-}
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href={`${withPrefix('/')}img/apple-touch-icon.png`}
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            href={`${withPrefix('/')}img/favicon-32x32.png`}
+            sizes="32x32"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            href={`${withPrefix('/')}img/favicon-16x16.png`}
+            sizes="16x16"
+          />
+          <link
+            rel="mask-icon"
+            href={`${withPrefix('/')}img/safari-pinned-tab.svg`}
+            color="#ff4400"
+          />
+
+          <meta name="theme-color" content="#fff" />
+          <meta property="og:type" content="business.business" />
+          <meta property="og:title" content="" />
+          <meta property="og:url" content="/" />
+          <meta property="og:image" content={`${withPrefix('/')}img/og-image.jpg`} />
+
+        </Helmet>
+        <Scrollbars
+          ref={(r) => window.scrollbars = r}
+          speed={1.2}
+          onScroll={(values) => this.handleScroll(values)}
+          horizontalContainerStyle={containerStyle}
+          horizontalScrollbarStyle={scrollbarStyle}
+          verticalContainerStyle={containerStyle}
+          verticalScrollbarStyle={scrollbarStyle}
+        >
+          <Header />
+          <Main>
+            {this.props.children}
+          </Main>
+          <Footer />
+          <CookieConsent />
+        </Scrollbars>
+      </Theme>
+    )
+  }
+} 
+
 
 export default TemplateWrapper
