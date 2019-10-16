@@ -15,15 +15,38 @@ collections:
       - name: "general-settings"
         label: "Sidinställningar"
         file: "src/data/settings.json"
-        description: "General Site Settings"
+        description: "General site settings"
         fields:
-          - label: "Startsida"
-            name: "homepage"
-            widget: "relation"
-            collection: "sidor"
-            searchFields: "title"
-            valueField: "title"
-            displayFields: "title"
+          - {label: "Startsida", name: "homepage", widget: "relation", collection: "sidor", searchFields: "title", valueField: "title", displayFields: "title"}
+          - {label: "Sida för integritetspolicy", name: "integritypage", widget: "relation", collection: "sidor", searchFields: "title", valueField: "title", displayFields: "title"}
+          - label: "Sociala medier"
+            name: "socialmedia"
+            widget: "object"
+            required: false
+            fields:
+              - {label: "Facebook", name: "facebook", widget: "string", required: false}
+              - {label: "Instagram", name: "instagram", widget: "string", required: false}
+              - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+              - {label: "Twitter", name: "twitter", widget: "string", required: false}
+              - {label: "Youtube", name: "youtube", widget: "string", required: false}
+      - name: "header-settings"
+        label: "Header"
+        file: "src/data/header.json"
+        description: "Header content"
+        fields:
+          - label: "Huvudmeny"
+            name: "mainmenu"
+            widget: "list"
+            field: {label: Länk, name: link, widget: string}
+      - name: "footer-settings"
+        label: "Footer"
+        file: "src/data/footer.json"
+        description: "Footer content"
+        fields:
+          - label: "Meny"
+            name: "footermenu"
+            widget: "list"
+            field: {label: Länk, name: link, widget: string} 
 
   - label: "Artiklar"
     label_singular: "Artikel"

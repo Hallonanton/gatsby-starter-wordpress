@@ -14,7 +14,7 @@ import CookieConsent from './CookieConsent'
 ==============================================================================*/
 
 const Main = styled('main')`
-  flex-grow: 1;
+  
 `
 
 const Thumb = styled('div')`
