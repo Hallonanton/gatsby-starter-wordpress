@@ -31,7 +31,7 @@ const Col = styled('div')`
   padding-right: 15px;
   text-align: center;
 
-  &:first-child {
+  &:first-of-type {
     margin-bottom: 30px;
   }
 

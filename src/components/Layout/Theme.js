@@ -3,9 +3,8 @@ import _ from 'lodash'
 import 'reset-css'
 import PropTypes from 'prop-types'
 import ReactBreakpoints from 'react-breakpoints'
-import { cache, injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
-import { CacheProvider } from '@emotion/core'
+import { Global, css } from '@emotion/core'
 import { createBreakpointHelpers } from '../../utility/breakpoints'
 
 
@@ -253,7 +252,7 @@ const fontSizes = {
   # Fallback styles
 ==============================================================================*/
 
-injectGlobal`
+const globalStyles = css`
   ::-moz-selection {
     background: ${colors.primary}; 
     color: ${colors.white};  
@@ -354,16 +353,15 @@ export const theme = {
 const Theme = ({ children }) => {
 
   return (
-    <CacheProvider value={cache}>
-      <ReactBreakpoints
-        guessedBreakpoint={reactBreakpoints.xl}
-        breakpoints={reactBreakpoints}
-      >
-        <ThemeProvider theme={theme}>
-          {children}
-        </ThemeProvider>
-      </ReactBreakpoints>
-    </CacheProvider>
+    <ReactBreakpoints
+      guessedBreakpoint={reactBreakpoints.xl}
+      breakpoints={reactBreakpoints}
+    >
+      <Global styles={globalStyles} />
+      <ThemeProvider theme={theme}>
+        {children}
+      </ThemeProvider>
+    </ReactBreakpoints>
   )
 }
 

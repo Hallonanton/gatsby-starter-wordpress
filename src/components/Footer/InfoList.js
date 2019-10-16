@@ -25,7 +25,7 @@ const ListWrapper = styled('nav')`
     margin-left: 60px;
     text-align: left;
 
-    &:first-child {
+    &:first-of-type {
       margin-left: 0px;
     }
   }

@@ -72,7 +72,7 @@ const StyledNavigationItem = styled(NavigationItem)`
     li {
       margin-right: 0px;
 
-      &:first-child {
+      &:first-of-type {
         ${StyledLink} {
           padding-top: 10px;
         }
