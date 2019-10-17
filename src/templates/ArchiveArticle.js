@@ -192,6 +192,10 @@ export const categoryQuery = graphql`
           categories: { in: $category }
         } 
       }
+      sort: {
+        fields: [frontmatter___date, frontmatter___title]
+        order: [DESC, ASC]
+      }
     ) {
       edges {
         node {
