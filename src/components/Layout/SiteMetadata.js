@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
-import { withPrefix } from 'gatsby'
+import { graphql, useStaticQuery, withPrefix } from 'gatsby'
 import { useTheme } from 'emotion-theming'
 
 /*==============================================================================
@@ -9,58 +8,39 @@ import { useTheme } from 'emotion-theming'
 ==============================================================================*/
 
 export const useSiteMetadata = () => {
-  const { site } = useStaticQuery(
+  const result = useStaticQuery(
     graphql`
       query MetadataQuery {
-        site {
-          siteMetadata {
-            site
-            title
-            description
-          }
-        }
+        ...SiteMetaQuery
       }
     `
   )
-  return site.siteMetadata
+  return result
 }
 
 const SiteMetadata = () => {
 
   const theme = useTheme()
-  const { site, title, description } = useSiteMetadata()
+  const { site, allFile } = useSiteMetadata()
+  const { sitename, title, titleSuffix, description } = site.siteMetadata
+  const favicons = allFile.edges[0].node
+  const finalTitle = `${title} ${titleSuffix} ${sitename}`
 
   return (
     <Helmet>
       <html lang="sv" />
-      <title>{title}</title>
+      <title>{finalTitle}</title>
       <meta name="description" content={description} />
 
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href={`${withPrefix('/')}img/apple-touch-icon.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        href={`${withPrefix('/')}img/favicon-32x32.png`}
-        sizes="32x32"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        href={`${withPrefix('/')}img/favicon-16x16.png`}
-        sizes="16x16"
-      />
-      <link
-        rel="mask-icon"
-        href={`${withPrefix('/')}img/safari-pinned-tab.svg`}
-        color="#ff4400"
-      />
+      {Object.keys(favicons.icons).map((icon, i) => (
+        <link key={i} rel="icon" href={icon.src} type="image/png" sizes={`${icon.width}x${icon.height}`} />
+      ))}
+      {Object.keys(favicons.appleTouchIcons).map((icon, i) => (
+        <link key={i} rel="apple-touch-icon" href={icon.src} type="image/png" sizes={`${icon.width}x${icon.height}`} />
+      ))}
 
       <meta name="theme-color" content={theme.colors.bg} />
-      <meta property="og:site_name" content={site} />
+      <meta property="og:site_name" content={sitename} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="sv_SE" />
