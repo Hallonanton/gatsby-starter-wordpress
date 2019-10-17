@@ -10,7 +10,7 @@ export const SiteMetaQuery = graphql`
         description
       }
     }
-    allFile(filter: {
+    favicon: allFile(filter: {
       name: {eq: "favicon"}
     }) {
       edges {
@@ -49,6 +49,19 @@ export const SiteMetaQuery = graphql`
               ...GatsbyImageSharpFixed
             }
             iPhonePlus: fixed(width: 180, height: 180) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
+    }
+    ogImage: allFile(filter: {
+      name: {eq: "default-og-image"}
+    }) {
+      edges {
+        node {
+          childImageSharp {
+            fixed(width: 1200, height: 630) {
               ...GatsbyImageSharpFixed
             }
           }
