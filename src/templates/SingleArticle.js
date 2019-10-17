@@ -4,6 +4,7 @@ import { graphql, Link } from 'gatsby'
 import Img from "gatsby-image"
 import styled from '@emotion/styled'
 import Layout from '../components/Layout/Layout'
+import PageMetadata from '../components/Layout/PageMetadata'
 import Container from '../components/UI/Grid'
 import { Mega, Heading } from '../components/UI/Headings'
 import Divider from '../components/UI/Divider'
@@ -87,10 +88,13 @@ export class ArticlePostTemplate extends Component {
 const SingleArticle = ({ data }) => {
 
   const { html, frontmatter } = data.markdownRemark
+  const metaData = frontmatter.meta
   const posts = data.allMarkdownRemark.edges
 
   return (
     <Layout>
+      <PageMetadata {...metaData} />
+
       <ArticlePostTemplate html={html} {...frontmatter} />
 
       <StyledContainer>

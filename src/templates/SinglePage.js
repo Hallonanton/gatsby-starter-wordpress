@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import Provider from '../components/Sections/Provider'
 import Layout from '../components/Layout/Layout'
+import PageMetadata from '../components/Layout/PageMetadata'
 import Container from '../components/UI/Grid'
 
 export class PageTemplate extends Component {
@@ -18,9 +19,11 @@ export class PageTemplate extends Component {
 const SinglePage = ({ data }) => {
 
   const { frontmatter } = data.markdownRemark
+  const metaData = frontmatter.meta
 
   return (
     <Layout>
+      <PageMetadata {...metaData} />
       <PageTemplate {...frontmatter} />
     </Layout>
   )

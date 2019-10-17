@@ -75,7 +75,6 @@ sections:
     type: textCards
 meta:
   metaDescription: MetaDescription
-  metaImage: /img/blog-index.jpg
   metaTitle: MetaTitle
 ---
 

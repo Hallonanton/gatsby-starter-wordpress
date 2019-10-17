@@ -113,6 +113,7 @@ export const PageSectionsFragment = graphql`
           }
         }
       }
+      ...Meta
     }
   }
 `
@@ -179,18 +180,16 @@ export const ArticlePageFragment = graphql`
           }
         }
       }
+      ...Meta
     }
   }
 `
 
-/*export const MetaFragment = graphql`
-  fragment Meta on MarkdownRemarkFrontmatter {
+export const MetaFragment = graphql`
+  fragment Meta on Frontmatter {
     meta {
       metaDescription
       metaTitle
-      metaImage {
-        name
-      }
     }
   }
-`*/
+`
