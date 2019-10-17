@@ -3,6 +3,11 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 
+
+/*==============================================================================
+  # Create pages
+==============================================================================*/
+
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
@@ -118,24 +123,55 @@ exports.createPages = ({ actions, graphql }) => {
         })
       })
      }
-
-
   })
 }
+
+/*==============================================================================
+  # Customize GraphQL schema
+==============================================================================*/
+
+//https://www.gatsbyjs.org/docs/schema-customization/
+
+//This will allow any socialmedia link to be left empty without causing a GraphQL error
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type DataJson implements Node {
+      socialmedia: DataJsonSocialmedia
+    }
+    type DataJsonSocialmedia {
+      Facebook: String
+      Instagram: String
+      LinkedIn: String
+      Twitter: String
+      Youtube: String
+    }
+  `
+  createTypes(typeDefs)
+}
+
+/*==============================================================================
+  # Create image nodes
+==============================================================================*/
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   fmImagesToRelative(node) // convert image paths for gatsby images
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === 'MarkdownRemark') {
     const value = createFilePath({ node, getNode })
     createNodeField({
-      name: `slug`,
+      name: 'slug',
       node,
       value,
     })
   }
 }
+
+
+/*==============================================================================
+  # Fix react warning
+==============================================================================*/
 
 exports.onCreateWebpackConfig = ({ getConfig, stage }) => {
   const config = getConfig()

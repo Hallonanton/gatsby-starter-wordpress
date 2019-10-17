@@ -2,33 +2,33 @@
   "mainmenu": [
     {
       "title": "Startsida",
-      "link": "/"
+      "to": "/"
     },
     {
       "title": "Artiklar",
-      "link": "/artiklar",
+      "to": "/artiklar",
       "submenu": [
         {
           "title": "Artikel 1",
-          "link": "/artiklar/testing-testing"
+          "to": "/artiklar/testing-testing"
         },
         {
           "title": "Artikel 2",
-          "link": "/artiklar/artikel-nummer-2"
+          "to": "/artiklar/artikel-nummer-2"
         },
         {
           "title": "Flavor",
-          "link": "/artiklar/flavor"
+          "to": "/artiklar/flavor"
         }
       ]
     },
     {
       "title": "Sida 2",
-      "link": "/sida-nummer-2"
+      "to": "/sida-nummer-2"
     },
     {
       "title": "Sida 3",
-      "link": "/sida-nummer-3"
+      "to": "/sida-nummer-3"
     }
   ]
 }

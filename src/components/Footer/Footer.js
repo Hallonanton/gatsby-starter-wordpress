@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import { StaticQuery, graphql } from 'gatsby'
 import HorizontalNav from '../Navigation/HorizontalNav'
 import { StyledLink } from '../Navigation/NavigationItem'
 import Container from '../UI/Grid'
@@ -72,93 +73,47 @@ class Footer extends Component {
 
   render() {
 
-    const infoText = [
-      {
-        title: 'Adressvägen 1'
-      },
-      {
-        title: '12 345 Ankeborg'
-      },
-      {
-        title: '123 - 45 67 89'
-      },
-      {
-        title: 'info@mejl.com'
-      }
-    ]
-
-    const infoLinks = [
-      {
-        title: 'Placeholder 1',
-        to: '/',
-        target: false
-      },
-      {
-        title: 'Placeholder 2',
-        to: '/',
-        target: false
-      },
-      {
-        title: 'Placeholder 3',
-        to: '/',
-        target: false
-      },
-      {
-        title: 'Placeholder 4',
-        to: '/',
-        target: false
-      },
-      {
-        title: 'Placeholder 5',
-        to: '/',
-        target: false
-      }
-    ]
-
-    const bottomLinks = [
-      {
-        title: 'Användarvillkor',
-        to: '/',
-        target: false
-      },
-      {
-        title: 'Cookies',
-        to: '/',
-        target: false
-      }
-    ]
-
     return (
-      <FooterWrapper>
-        <Container maxWidth>
+      <StaticQuery 
+        query={graphql`
+          query FooterQuery {
+            ...Footer
+          }
+        `}
+        render={data => {
 
-          <FooterRow>
+          let footermenu = data.allDataJson.edges[0].node.footermenu
+          let bottomLinks = data.allDataJson.edges[0].node.bottommenu
 
-            <Logo />
+          return (
+            <FooterWrapper>
+              <Container maxWidth>
 
-            <NavigationContainer>
-              <InfoList 
-                title="Om oss"
-                items={infoText}
-              />
-              <InfoList 
-                title="Tjänster"
-                items={infoLinks}
-              />
-              <InfoList 
-                title="Produkter"
-                items={infoLinks}
-              />
-            </NavigationContainer>
+                <FooterRow>
 
-          </FooterRow>
+                  <Logo />
 
-          <BottomRow>
-            <DiscreetNav links={bottomLinks} />
-          </BottomRow>
+                  <NavigationContainer>
+                    {footermenu && footermenu.map( (item, i) => (
+                      <InfoList 
+                        key={i}
+                        title={item.title}
+                        items={item.links}
+                      />
+                    ))}
+                  </NavigationContainer>
 
-        </Container>
-      </FooterWrapper>
+                </FooterRow>
+
+                <BottomRow>
+                  <DiscreetNav links={bottomLinks} />
+                </BottomRow>
+
+              </Container>
+            </FooterWrapper>
+          )
+        }}
+      />
     )
   }
 }

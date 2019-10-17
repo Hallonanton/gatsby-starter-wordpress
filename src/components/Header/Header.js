@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import { Media } from 'react-breakpoints'
+import { StaticQuery, graphql } from 'gatsby'
 import Container from '../UI/Grid'
 import MobileNav from './Mobile/MobileNav'
 import DesktopNav from './Desktop/DesktopNav'
@@ -8,6 +9,8 @@ import DesktopNav from './Desktop/DesktopNav'
 import Facebook from '../../img/social/facebook.svg'
 import Twitter from '../../img/social/twitter.svg'
 import Instagram from '../../img/social/instagram.svg'
+import LinkedIn from '../../img/social/instagram.svg'
+import Youtube from '../../img/social/instagram.svg'
 
 /*==============================================================================
   # Styles
@@ -89,6 +92,17 @@ class Navbar extends Component {
     scrollState: 'not-scrolled',
   }
 
+  getIcon = (name) => {
+    const icons = {
+      Facebook,
+      Instagram,
+      LinkedIn,
+      Twitter,
+      Youtube
+    }
+    return icons[name]
+  }
+
   handleScroll = e => {  
     const newPos = document.scrollbar.top || 0
     const oldPos = this.state.scrollY
@@ -115,118 +129,82 @@ class Navbar extends Component {
 
   render() {
 
-    const mainLinks = [
-      {
-        title: 'About',
-        to: '/about',
-        target: false
-      },
-      {
-        title: 'Solutions',
-        to: '/',
-        target: false,
-        children: [
-          {
-            title: 'Sub Nav Item One',
-            to: '/',
-            target: false,
-          },
-          {
-            title: 'Sub Nav Item Two',
-            to: '/',
-            target: false,
-          },
-          {
-            title: 'Sub Nav Item Three',
-            to: '/',
-            target: false,
-          },
-          {
-            title: 'Sub Nav Item Four',
-            to: '/',
-            target: false,
-          },
-          {
-            title: 'Sub Nav Item Five',
-            to: '/',
-            target: false,
-          }
-        ]
-      },
-      {
-        title: 'Resources',
-        to: '/',
-        target: false
-      },
-      {
-        title: 'Pricing',
-        to: '/',
-        target: false
-      },
-      {
-        title: 'Contact',
-        to: '/',
-        target: false
-      }
-    ]
-
-    const secondaryLinks = [
-      {
-        title: 'Facebook',
-        to: 'https://www.facebook.com/sv/',
-        icon: <Facebook />,
-        target: true
-      },
-      {
-        title: 'Twitter',
-        to: 'https://www.twitter.com/sv/',
-        icon: <Twitter />,
-        target: true
-      },
-      {
-        title: 'Instagram',
-        to: 'https://www.instagram.com/sv/',
-        icon: <Instagram />,
-        target: true
-      }
-    ]
-
     const {
       mobileMenuOpen
     } = this.state
 
+
     return (
-      <Fragment>
-        <Header className={this.state.scrollState}>
-          <StyledContainer maxWidth>
-            <Media>
-              {({ breakpoints, currentBreakpoint }) => 
-                breakpoints[currentBreakpoint] >= breakpoints.md ? (
-                  
-                  <DesktopNav 
-                    mainLinks={mainLinks}
-                    secondaryLinks={secondaryLinks}
-                  />
+      <StaticQuery 
+        query={graphql`
+          query HeaderQuery {
+            ...Header
+          }
+        `}
+        render={data => {
 
-                ) : (
+          let mainmenu = null
+          let socialmedia = null
+          let socialmediaLinks = []
 
-                  <MobileNav 
-                    mainLinks={mainLinks}
-                    secondaryLinks={secondaryLinks}
-                    open={mobileMenuOpen}
-                    onToggleMenu={menuOpen =>
-                      this.handleToggleMobileMenu(menuOpen)
-                    }
-                  />
+          data.allDataJson.edges.forEach(item => {
+            mainmenu = item.node.mainmenu ? item.node.mainmenu : mainmenu
+            socialmedia = item.node.socialmedia ? item.node.socialmedia : socialmedia
+          })
 
-                )
+          if ( socialmedia ) {
+            for (let key in socialmedia) {
+              if ( socialmedia.hasOwnProperty(key) && socialmedia[key]) {
+
+                const title = key
+                const Icon = this.getIcon(title)
+
+                socialmediaLinks.push({
+                  title: title,
+                  to: socialmedia[key],
+                  icon: <Icon />,
+                  target: true
+                })
+
               }
-            </Media>
-          </StyledContainer>
-        </Header>
+            }
+          }
 
-        <Placeholder />
-      </Fragment>
+          return (
+            <Fragment>
+              <Header className={this.state.scrollState}>
+                <StyledContainer maxWidth>
+                  <Media>
+                    {({ breakpoints, currentBreakpoint }) => 
+                      breakpoints[currentBreakpoint] >= breakpoints.md ? (
+                        
+                        <DesktopNav 
+                          mainLinks={mainmenu}
+                          secondaryLinks={socialmediaLinks}
+                        />
+
+                      ) : (
+
+                        <MobileNav 
+                          mainLinks={mainmenu}
+                          secondaryLinks={socialmediaLinks}
+                          open={mobileMenuOpen}
+                          onToggleMenu={menuOpen =>
+                            this.handleToggleMobileMenu(menuOpen)
+                          }
+                        />
+
+                      )
+                    }
+                  </Media>
+                </StyledContainer>
+              </Header>
+
+              <Placeholder />
+            </Fragment>
+          )
+        }}
+      />
     )
   }
 }

@@ -27,27 +27,27 @@
         {
           "type": "internal",
           "title": "Placeholder 1",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 2",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 3",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 4",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 5",
-          "link": "/"
+          "to": "/"
         }
       ]
     },
@@ -57,27 +57,27 @@
         {
           "type": "internal",
           "title": "Placeholder 1",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 2",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 3",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 4",
-          "link": "/"
+          "to": "/"
         },
         {
           "type": "internal",
           "title": "Placeholder 5",
-          "link": "/"
+          "to": "/"
         }
       ]
     }
@@ -85,7 +85,7 @@
   "bottommenu": [
     {
       "title": "Integritetspolicy",
-      "link": "/integritetspolicy"
+      "to": "/integritetspolicy"
     }
   ]
 }

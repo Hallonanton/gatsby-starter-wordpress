@@ -24,11 +24,11 @@ collections:
             widget: "object"
             required: false
             fields:
-              - {label: "Facebook", name: "facebook", widget: "string", required: false}
-              - {label: "Instagram", name: "instagram", widget: "string", required: false}
-              - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
-              - {label: "Twitter", name: "twitter", widget: "string", required: false}
-              - {label: "Youtube", name: "youtube", widget: "string", required: false}
+              - {label: "Facebook", name: "Facebook", widget: "string", required: false}
+              - {label: "Instagram", name: "Instagram", widget: "string", required: false}
+              - {label: "LinkedIn", name: "LinkedIn", widget: "string", required: false}
+              - {label: "Twitter", name: "Twitter", widget: "string", required: false}
+              - {label: "Youtube", name: "Youtube", widget: "string", required: false}
       - name: "header-settings"
         label: "Header"
         file: "src/data/header.json"
@@ -41,15 +41,15 @@ collections:
             required: false
             fields:
               - {label: "Titel", name: "title", widget: "string"} 
-              - {label: "Länk", name: "link", widget: "string"} 
+              - {label: "Länk", name: "to", widget: "string"} 
               - label: "Undermeny"
                 label_singular: "Länk"
                 name: "submenu"
                 widget: "list"
                 required: false
                 fields:
-                  - {label: "Titel", name: "title", widget: "string"} 
-                  - {label: "Länk", name: "link", widget: "string"}  
+                  - {label: "Länktext", name: "title", widget: "string"} 
+                  - {label: "Url", name: "to", widget: "string"}  
       - name: "footer-settings"
         label: "Footer"
         file: "src/data/footer.json"
@@ -75,16 +75,16 @@ collections:
                     name: "internal"
                     widget: "object"
                     fields:
-                      - {label: "Titel", name: "title", widget: "string"} 
-                      - {label: "Länk", name: "link", widget: "string"} 
+                      - {label: "Länktext", name: "title", widget: "string"} 
+                      - {label: "Url", name: "to", widget: "string"} 
           - label: "Diskret meny"
             label_singular: "Länk"
             name: "bottommenu"
             widget: "list"
             required: false
             fields:
-              - {label: "Titel", name: "title", widget: "string"} 
-              - {label: "Länk", name: "link", widget: "string"}
+              - {label: "Länktext", name: "title", widget: "string"} 
+              - {label: "Url", name: "to", widget: "string"}
 
   - label: "Artiklar"
     label_singular: "Artikel"

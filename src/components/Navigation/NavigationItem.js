@@ -84,7 +84,7 @@ export const StyledLink = styled(Link)`
     transition: all 450ms ${({theme}) => theme.easings.primary};
   }
 
-  &.has-children {
+  &.has-submenu {
     padding-right: 18px;
 
     &::after {
@@ -128,12 +128,24 @@ const AnimateWrapper = ({animate, isOpen, children}) => {
 
 class NavigationItem extends Component {
 
+  componentDidMount() {
+    const { submenu } = this.props
+    this.setState({
+      hasSubmenu: submenu && (submenu.length > 0)
+    })
+  }
+
   state = {
-    isOpen: false
+    isOpen: false,
+    hasSubmenu: false
   }
 
   handleClick = (e) => {
-    e.preventDefault()
+    const { hasSubmenu } = this.state
+
+    if ( hasSubmenu && typeof window !== 'undefined' && window.matchMedia('(max-width: 991.99px)') ) {
+      e.preventDefault()
+    }
 
     this.setState({
       isOpen: !this.state.isOpen
@@ -142,12 +154,12 @@ class NavigationItem extends Component {
 
   render() {
 
-    const { className, to, title, icon, target, children, animateHeight, ...rest } = this.props
-    const hasChildren = children && (children.length > 0)
+    const { className, to, title, icon, target, submenu, animateHeight, ...rest } = this.props
+    const hasSubmenu = submenu && (submenu.length > 0)
     const { isOpen } = this.state
 
     let linkClasses = ""
-    linkClasses += hasChildren ? " has-children" : ""
+    linkClasses += hasSubmenu ? " has-submenu" : ""
     linkClasses += icon ? " has-icon" : ""
     linkClasses += isOpen ? " open" : ""
 
@@ -157,7 +169,7 @@ class NavigationItem extends Component {
           to={to} 
           target={target} {...rest}
           className={linkClasses}
-          onClick={e => this.handleClick(e)}
+          onClick={(e) => this.handleClick(e)}
         >
           {icon ? (
             <Icon>{icon}</Icon>
@@ -165,10 +177,10 @@ class NavigationItem extends Component {
           <span>{title}</span>
         </StyledLink>
 
-        {hasChildren ? (
+        {hasSubmenu ? (
           <AnimateWrapper animate={animateHeight} isOpen={isOpen}>
             <SubMenu className={isOpen ? 'open' : null}>
-              {children.map((link, i) => (
+              {submenu.map((link, i) => (
                 <NavigationItem key={i} {...link} />
               ))}
             </SubMenu>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import _ from 'lodash'
+import { StaticQuery, graphql } from 'gatsby'
 import Button from '../UI/Button'
 import { setCookie, getCookie } from '../../utility/functions'
 import { Link } from 'gatsby'
@@ -127,14 +129,28 @@ class CookieConsent extends Component {
     const { animateOut, display } = this.state
 
     return !display ? null : (
-      <Wrapper className={animateOut ? 'animate-out' : ''}>
-        <Text>Vi använder cookies för att ge dig bästa möjliga webbplatsupplevelse. Genom att använda webbplatsnamn godkänner du vår <Link to="/">integritetspolicy.</Link></Text>
-        <StyledButton
-          onClick={e => this.onAllow(e)}
-        >
-          Jag förstår
-        </StyledButton>
-      </Wrapper>
+      <StaticQuery 
+        query={graphql`
+          query CookieConsentQuery {
+            ...CookieConsent
+          }
+        `}
+        render={data => {
+
+          const integritypageLink = _.kebabCase(data.allDataJson.edges[0].node.integritypage)
+
+          return (
+            <Wrapper className={animateOut ? 'animate-out' : ''}>
+              <Text>Vi använder cookies för att ge dig bästa möjliga webbplatsupplevelse. Genom att använda webbplatsnamn godkänner du vår <Link to={`/${integritypageLink}`}>integritetspolicy.</Link></Text>
+              <StyledButton
+                onClick={e => this.onAllow(e)}
+              >
+                Jag förstår
+              </StyledButton>
+            </Wrapper>
+          )
+        }}
+      />
     )
   }
 }
