@@ -102,6 +102,7 @@ collections:
       - {label: "Kategorier", name: "categories", widget: "list", required: false}
       - label: "Metadata"
         name: "meta"
+        hit: "Använd detta fält för att spara över standardmetadata."
         widget: "object"
         required: false
         fields:
@@ -122,7 +123,6 @@ collections:
         label_singular: "Sektion"
         name: "sections"
         widget: "list"
-        required: false
         types:
           - label: "Text"
             name: "text"
@@ -191,6 +191,7 @@ collections:
                       - {label: "Url", name: "to", widget: "string", required: false}
       - label: "Metadata"
         name: "meta"
+        hit: "Använd detta fält för att spara över standardmetadata."
         widget: "object"
         required: false
         fields:
