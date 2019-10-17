@@ -132,7 +132,8 @@ exports.createPages = ({ actions, graphql }) => {
 
 //https://www.gatsbyjs.org/docs/schema-customization/
 
-//This will allow any socialmedia link to be left empty without causing a GraphQL error
+//This will allow different fields to be left empty without causing a GraphQL error
+//The result will be that missing fields default to null instead on beaing declared as undefined
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
@@ -145,6 +146,17 @@ exports.createSchemaCustomization = ({ actions }) => {
       LinkedIn: String
       Twitter: String
       Youtube: String
+    }
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      meta: Meta
+    }
+    type Meta {
+      metaDescription: String
+      metaTitle: String
+      metaImage: File
     }
   `
   createTypes(typeDefs)

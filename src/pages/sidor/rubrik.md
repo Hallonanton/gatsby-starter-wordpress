@@ -75,7 +75,5 @@ sections:
     type: textCards
 meta:
   metaDescription: Metabeskrivning Startsida
-  metaImage: ''
-  metaTitle: ''
 ---
 

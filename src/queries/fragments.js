@@ -182,3 +182,15 @@ export const ArticlePageFragment = graphql`
     }
   }
 `
+
+/*export const MetaFragment = graphql`
+  fragment Meta on MarkdownRemarkFrontmatter {
+    meta {
+      metaDescription
+      metaTitle
+      metaImage {
+        name
+      }
+    }
+  }
+`*/
