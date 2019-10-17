@@ -101,13 +101,13 @@ collections:
       - {label: "Innehåll", name: "body", widget: "markdown"}
       - {label: "Kategorier", name: "categories", widget: "list", required: false}
       - label: "Metadata"
-          name: "meta"
-          widget: "object"
-          required: false
-          fields:
-            - {label: "Titel", name: "metaTitle", widget: "string", required: false}
-            - {label: "Beskrivning", name: "metaDescription", widget: "text", required: false}
-            - {label: "Bild", name: "metaImage", widget: "image", required: false}
+        name: "meta"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Titel", name: "metaTitle", widget: "string", required: false}
+          - {label: "Beskrivning", name: "metaDescription", widget: "text", required: false}
+          - {label: "Bild", name: "metaImage", widget: "image", required: false}
 
   - label: "Sidor"
     label_singular: "Sida"
