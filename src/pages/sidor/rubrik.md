@@ -73,5 +73,9 @@ sections:
         title: Textkort 3
     sectionKey: SectionTextCards
     type: textCards
+meta:
+  metaDescription: Metabeskrivning Startsida
+  metaImage: /img/blog-index.jpg
+  metaTitle: Metatitel Startsida
 ---
 
