@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import Layout from '../components/Layout/Layout'
+import PageMetadata from '../components/Layout/PageMetadata'
 import Container from '../components/UI/Grid'
 import Searchbar from '../components/UI/Searchbar'
 import Button from '../components/UI/Button'
@@ -165,9 +166,13 @@ const ArchiveCategory = ({ data, pageContext }) => {
 
   const posts = data.allMarkdownRemark.edges
   const title = `Artiklar i kategorin ${pageContext.category}`
+  let metaData = {
+    metaTitle: pageContext.category
+  }
 
   return (
     <Layout>
+      <PageMetadata {...metaData} />
       <ArchiveTemplate 
         title={title}
         posts={posts}

@@ -88,8 +88,20 @@ export class ArticlePostTemplate extends Component {
 const SingleArticle = ({ data }) => {
 
   const { html, frontmatter } = data.markdownRemark
-  const metaData = frontmatter.meta
   const posts = data.allMarkdownRemark.edges
+  let metaData = frontmatter.meta
+
+  if ( !metaData || (metaData && !metaData.metaTitle) ) {
+    if ( !metaData ) {
+      metaData = {}
+    }
+    if ( !metaData.metaTitle ) {
+      metaData.metaTitle = frontmatter.title
+    }
+    if ( !metaData.metaDescription ) {
+      metaData.metaDescription = frontmatter.description
+    }
+  }
 
   return (
     <Layout>

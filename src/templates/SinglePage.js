@@ -19,7 +19,14 @@ export class PageTemplate extends Component {
 const SinglePage = ({ data }) => {
 
   const { frontmatter } = data.markdownRemark
-  const metaData = frontmatter.meta
+  let metaData = frontmatter.meta
+
+  if ( !metaData || (metaData && !metaData.metaTitle) ) {
+    if ( !metaData ) {
+      metaData = {}
+    }
+    metaData.metaTitle = frontmatter.title
+  }
 
   return (
     <Layout>

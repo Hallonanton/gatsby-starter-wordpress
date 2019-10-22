@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Layout from '../components/Layout/Layout'
+import PageMetadata from '../components/Layout/PageMetadata'
 import Container from '../components/UI/Grid'
 import { Mega } from '../components/UI/Headings'
 import Text from '../components/UI/Text'
@@ -37,6 +38,7 @@ const StyledButton = styled(Button)`
 
 const NotFoundPage = () => (
   <Layout>
+  	<PageMetadata metaTitle="Något gick fel..." />
     <StyledContainer>
     	<Content>
 	    	<Heading>Något gick fel...</Heading>

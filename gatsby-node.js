@@ -22,7 +22,6 @@ exports.createPages = ({ actions, graphql }) => {
             }
             frontmatter {
               templateKey
-              title
               categories
             }
           }
@@ -65,19 +64,19 @@ exports.createPages = ({ actions, graphql }) => {
       let { slug } = edge.node.fields
 
       // Save categories for later use
-      if (_.get(edge, `node.frontmatter.categories`)) {
+      if (_.get(edge, 'node.frontmatter.categories')) {
         allCategories = allCategories.concat(edge.node.frontmatter.categories)
       }
 
       // Exclude settings pages from page creation
       if ( !slug.includes('settings') ) {    
 
-        let { categories, templateKey, title } = edge.node.frontmatter
+        let { categories, templateKey } = edge.node.frontmatter
 
         // If template is page, remove "sidor" directory from path
         if ( templateKey === 'SinglePage' ) {
 
-          if ( title === homepage ) {
+          if ( slug === homepage ) {
             slug = "/"
 
           } else {
