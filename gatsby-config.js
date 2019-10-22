@@ -3,11 +3,13 @@ module.exports = {
     title: 'Gatsby + Netlify CMS Starter',
     titleSuffix: '|',
     sitename: 'Starter',
+    siteUrl: 'https://flamboyant-goodall-b47f55.netlify.com/',
     description:
       'This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
     'gatsby-transformer-json',
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support

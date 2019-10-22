@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import _ from 'lodash'
 import { StaticQuery, graphql } from 'gatsby'
 import Button from '../UI/Button'
 import { setCookie, getCookie } from '../../utility/functions'
@@ -137,7 +136,7 @@ class CookieConsent extends Component {
         `}
         render={data => {
 
-          const integritypageLink = _.kebabCase(data.allDataJson.edges[0].node.integritypage)
+          const integritypageLink = data.allDataJson.edges[0].node.integritypage
 
           return (
             <Wrapper className={animateOut ? 'animate-out' : ''}>
