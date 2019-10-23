@@ -18,6 +18,8 @@ const MobileContent = styled('section')`
 	align-items: center;
 	width: 100%;
 	height: 100%;
+	opacity: 1;
+	transition: all 450ms ${({theme}) => theme.easings.secondary};
 	z-index: 2;
 
 	&::before {
@@ -30,6 +32,10 @@ const MobileContent = styled('section')`
 		right: 0;
 		background-color: ${({theme}) => theme.colors.bg};
 		z-index: 2;
+	}
+
+	${({theme}) => theme.above.md} {
+		opacity: 0;
 	}
 `
 

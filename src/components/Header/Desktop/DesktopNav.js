@@ -10,6 +10,12 @@ import Logo from '../../UI/Logo'
 
 const DesktopContent = styled('div')`
   height: var(--header-height);
+  opacity: 1;
+  transition: all 450ms ${({theme}) => theme.easings.secondary};
+
+  ${({theme}) => theme.below.md} {
+    opacity: 0;
+  }
 `
 
 const NavFlex = styled('div')`
