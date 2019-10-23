@@ -11,7 +11,7 @@ import Logo from '../../UI/Logo'
   # Style
 ==============================================================================*/
 
-const MobileContent = styled('div')`
+const MobileContent = styled('section')`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
