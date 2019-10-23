@@ -95,10 +95,12 @@ class MobileNav extends Component {
 
 				<Logo/>
 
-				<HamburgerIcon 
+				{/*<HamburgerIcon 
 					open={open}
 					onToggleMenu={menuOpen => this.props.onToggleMenu(menuOpen)} 
-				/>
+				/>*/}
+
+				<div>Test</div>
 
 				<Menu open={this.props.open}>
 					<Container>
