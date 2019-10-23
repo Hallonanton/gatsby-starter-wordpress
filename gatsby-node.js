@@ -76,12 +76,11 @@ exports.createPages = ({ actions, graphql }) => {
         // If template is page, remove "sidor" directory from path
         if ( templateKey === 'SinglePage' ) {
 
-          if ( slug === homepage ) {
+          slug = slug.replace("/sidor", "")
+
+          //Set homepage
+          if ( slug === '/'+homepage+'/' ) {
             slug = "/"
-
-          } else {
-            slug = slug.replace("/sidor", "")
-
           }
         }
 
