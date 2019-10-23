@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { darken } from 'polished'
+import Link from '../Link'
 
 /*==============================================================================
   # Styles
@@ -65,6 +66,22 @@ const Inner = styled('span')`
 	}
 `
 
+const BaseButtonLink = styled(Link)`
+  ${buttonStyle}
+
+  &:hover {
+    ${Inner} {
+      transform: translateY(-2px);
+
+      &::after {
+        max-width: 100%;
+        opacity: 1;
+        transform:translate(-50%, 2px);
+      }
+    }
+  }
+`;
+
 const Button = styled('button')`
   ${buttonStyle}
 
@@ -86,6 +103,12 @@ const Button = styled('button')`
   # Components
 ==============================================================================*/
 
+export const ButtonLink = ({ children, ...props }) => (
+  <BaseButtonLink {...props}>
+    <Inner>{children}</Inner>
+  </BaseButtonLink>
+)
+
 const ButtonWithLoading = ({ loading, loadingText, children, ...props }) =>
   loading ? (
     <Button {...props}>
@@ -95,6 +118,6 @@ const ButtonWithLoading = ({ loading, loadingText, children, ...props }) =>
     <Button {...props}>
     	<Inner>{children}</Inner>
     </Button>
-  );
+  )
 
 export default ButtonWithLoading;

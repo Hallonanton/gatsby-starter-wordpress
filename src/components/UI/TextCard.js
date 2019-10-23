@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Link from '../Link'
-import { buttonStyle } from './Button'
+import { ButtonLink } from './Button'
 import { Heading } from './Headings'
 
 /*==============================================================================
@@ -40,8 +39,7 @@ const Text = styled('p')`
   ${({theme}) => theme.fontSizes.description}
 `
 
-const StryledLink = styled(Link)`
-  ${buttonStyle}
+const StyledLink = styled(ButtonLink)`
   display: inline-block;
   width: auto;
   min-width: 200px;
@@ -67,7 +65,7 @@ class TextCard extends Component {
       <Card>
         <Heading>{title}</Heading>
         <Text>{text}</Text>
-        {link ? (<StryledLink to={link.to}>{link.title}</StryledLink>) : null}
+        {link ? (<StyledLink to={link.to}>{link.title}</StyledLink>) : null}
       </Card>
     )
   }
