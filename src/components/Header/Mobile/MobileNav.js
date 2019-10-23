@@ -111,9 +111,9 @@ class MobileNav extends Component {
 
 						<MainNavigation links={mainLinks} />
 		          
-				        <SecondaryNavigation links={secondaryLinks} />
+		        <SecondaryNavigation links={secondaryLinks} />
 
-				      </Container>
+		      </Container>
 				</Menu>
 
 			</MobileContent>

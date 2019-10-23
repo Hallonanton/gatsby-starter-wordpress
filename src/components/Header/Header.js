@@ -173,7 +173,7 @@ class Navbar extends Component {
           return (
             <Fragment>
               <Header className={this.state.scrollState}>
-                <StyledContainer maxWidth>
+                <StyledContainer>
 
                   <Media>
                     {({ breakpoints, currentBreakpoint }) => 

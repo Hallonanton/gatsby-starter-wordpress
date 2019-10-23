@@ -1,50 +1,103 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 
 /*==============================================================================
   # Styles
 ==============================================================================*/
 
-const Wrapper = styled('div')`
+const BaseContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  margin: 0 auto;
   position: relative;
   flex: 1 1 auto;
   width: 100%;
-  max-width: ${({ maxWidth }) =>
-    maxWidth ? (maxWidth === 'small' ? '1400px' : '1720px') : 'none'};
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* props.fullWidth can be used to remove max-width */
+  max-width: ${({ fullWidth }) => fullWidth ? 'none' : '1200px' };
+
+  /* props.marginTop can be used to set predefined margins from Theme.js */
   margin-top: ${({ theme, marginTop }) =>
     typeof theme.margin[marginTop] !== 'undefined'
       ? theme.margin[marginTop]
       : '0px'};
-  padding-left: ${({ fullWidth }) => (fullWidth ? '0px' : '10px')};
-  padding-right: ${({ fullWidth }) => (fullWidth ? '0px' : '10px')};
-
-  ${({ theme }) => theme.above.sm} {
-    padding-left: ${({ fullWidth }) => (fullWidth ? '0px' : '15px')};
-    padding-right: ${({ fullWidth }) => (fullWidth ? '0px' : '15px')};
-  }
-
-  ${({ theme }) => theme.above.lg} {
-    padding-left: ${({ fullWidth }) => (fullWidth ? '0px' : '60px')};
-    padding-right: ${({ fullWidth }) => (fullWidth ? '0px' : '60px')};
-  }
-
-  ${({ theme }) => theme.above.xl} {
-    padding-left: ${({ fullWidth }) => (fullWidth ? '0px' : '110px')};
-    padding-right: ${({ fullWidth }) => (fullWidth ? '0px' : '110px')};
-  }
 `;
+
+
+const BaseRow = styled('div')`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+`
+
+
+const BaseCol = styled('div')`
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  /* Base column width */
+  ${({ col }) => col ? css`
+    flex: 0 0 ${100/(12/col)}%;
+    max-width: ${100/(12/col)}%;
+  `: null};
+
+  /* Responsive column width */
+  /* Ex: md="6" for half width above.md */
+  ${({ theme, ...props }) => theme.breakpointMap ? 
+    theme.breakpointMap.map(breakpoint => {
+
+      let { label } = breakpoint
+      return props[label] ? css`
+        ${theme.above[label]} {
+          flex: 0 0 ${100/(12/props[label])}%;
+          max-width: ${100/(12/props[label])}%;
+        }
+      ` : null
+
+    }) : null
+  }}
+`
+
 
 /*==============================================================================
   # Components
 ==============================================================================*/
 
-const Container = ({ children, ...rest }) => {
-  return <Wrapper {...rest}>{children}</Wrapper>;
-};
+/*
+ * Container
+ */
 
-export default Container;
+const Container = ({ children, ...rest }) => {
+  return <BaseContainer {...rest}>{children}</BaseContainer>;
+}
+export default Container
+
+/*
+ * Row
+ */
+
+export const Row = ({ children, ...rest }) => {
+  return <BaseRow {...rest}>{children}</BaseRow>;
+}
+
+
+/*
+ * Col
+ */
+
+export const Col = ({ children, ...rest }) => {
+  return <BaseCol {...rest}>{children}</BaseCol>;
+}

@@ -87,7 +87,7 @@ class Footer extends Component {
 
           return (
             <FooterWrapper>
-              <Container maxWidth>
+              <Container>
 
                 <FooterRow>
 
