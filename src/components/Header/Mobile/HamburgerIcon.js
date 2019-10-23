@@ -50,7 +50,7 @@ const keyframeBot = keyframes`
   }
 `
 
-const MenuBtn = styled('div')`
+const Hamburger = styled('div')`
   --transition-time: 300ms;
   --transition-easing: ${({theme}) => theme.easings.easeInOutBack};
 
@@ -142,7 +142,7 @@ const MenuBtn = styled('div')`
   # Component
 ==============================================================================*/
 
-class MenuButton extends Component {
+class HamburgerIcon extends Component {
 
   toggleMenu = () => {
     const open = !this.props.open
@@ -154,13 +154,13 @@ class MenuButton extends Component {
 
   render() {
     return (
-      <MenuBtn open={this.props.open} onClick={() => this.toggleMenu()}>
+      <Hamburger open={this.props.open} onClick={() => this.toggleMenu()}>
         <div className="menu-row top" />
         <div className="menu-row mid" />
         <div className="menu-row bot" />
-      </MenuBtn>
+      </Hamburger>
     )
   }
 }
 
-export default MenuButton
+export default HamburgerIcon

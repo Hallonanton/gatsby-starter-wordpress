@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import Container from '../../UI/Grid'
 import VerticalNav from '../../Navigation/VerticalNav'
-import MenuButton from './MenuButton'
+import HamburgerIcon from './HamburgerIcon'
 import Logo from '../../UI/Logo'
 
 
@@ -16,6 +16,7 @@ const MobileContent = styled('div')`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	width: 100%;
 	height: 100%;
 	z-index: 2;
 
@@ -94,7 +95,7 @@ class MobileNav extends Component {
 
 				<Logo/>
 
-				<MenuButton 
+				<HamburgerIcon 
 					open={open}
 					onToggleMenu={menuOpen => this.props.onToggleMenu(menuOpen)} 
 				/>
