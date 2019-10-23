@@ -357,7 +357,7 @@ const Theme = ({ children }) => {
 
   return (
     <ReactBreakpoints
-      guessedBreakpoint={reactBreakpoints.xl}
+      guessedBreakpoint={reactBreakpoints.sm}
       breakpoints={reactBreakpoints}
     >
       <Global styles={globalStyles} />
