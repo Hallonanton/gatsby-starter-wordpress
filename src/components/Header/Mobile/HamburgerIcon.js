@@ -50,7 +50,7 @@ const keyframeBot = keyframes`
   }
 `
 
-const Hamburger = styled('div')`
+const Hamburger = styled('span')`
   --transition-time: 300ms;
   --transition-easing: ${({theme}) => theme.easings.easeInOutBack};
 
@@ -158,9 +158,9 @@ class HamburgerIcon extends Component {
         open={this.props.open} 
         onClick={() => this.toggleMenu()}
       >
-        <div className="menu-row top"></div>
-        <div className="menu-row mid"></div>
-        <div className="menu-row bot"></div>
+        <span className="menu-row top"></span>
+        <span className="menu-row mid"></span>
+        <span className="menu-row bot"></span>
       </Hamburger>
     )
   }

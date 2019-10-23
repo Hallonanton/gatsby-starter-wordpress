@@ -174,29 +174,35 @@ class Navbar extends Component {
             <Fragment>
               <Header className={this.state.scrollState}>
                 <StyledContainer maxWidth>
+
                   <Media>
                     {({ breakpoints, currentBreakpoint }) => 
                       breakpoints[currentBreakpoint] < breakpoints.md ? (
                         
-                        <MobileNav 
-                          mainLinks={mainmenu}
-                          secondaryLinks={socialmediaLinks}
-                          open={mobileMenuOpen}
-                          onToggleMenu={menuOpen =>
-                            this.handleToggleMobileMenu(menuOpen)
-                          }
-                        />
+                        <Fragment>
+                          <MobileNav 
+                            mainLinks={mainmenu}
+                            secondaryLinks={socialmediaLinks}
+                            open={mobileMenuOpen}
+                            onToggleMenu={menuOpen =>
+                              this.handleToggleMobileMenu(menuOpen)
+                            }
+                          />
+                        </Fragment>
 
                       ) : (
 
-                        <DesktopNav 
-                          mainLinks={mainmenu}
-                          secondaryLinks={socialmediaLinks}
-                        />
+                        <Fragment>
+                          <DesktopNav 
+                            mainLinks={mainmenu}
+                            secondaryLinks={socialmediaLinks}
+                          />
+                        </Fragment>
 
                       )
                     }
                   </Media>
+
                 </StyledContainer>
               </Header>
 
