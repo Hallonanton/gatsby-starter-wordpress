@@ -100,7 +100,7 @@ class MobileNav extends Component {
 					onToggleMenu={menuOpen => this.props.onToggleMenu(menuOpen)} 
 				/>*/}
 
-				<div>Test</div>
+				<span>Test</span>
 
 				<Menu open={this.props.open}>
 					<Container>

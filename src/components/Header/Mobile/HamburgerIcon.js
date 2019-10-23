@@ -154,10 +154,13 @@ class HamburgerIcon extends Component {
 
   render() {
     return (
-      <Hamburger open={this.props.open} onClick={() => this.toggleMenu()}>
-        <div className="menu-row top" />
-        <div className="menu-row mid" />
-        <div className="menu-row bot" />
+      <Hamburger 
+        open={this.props.open} 
+        onClick={() => this.toggleMenu()}
+      >
+        <div className="menu-row top"></div>
+        <div className="menu-row mid"></div>
+        <div className="menu-row bot"></div>
       </Hamburger>
     )
   }
