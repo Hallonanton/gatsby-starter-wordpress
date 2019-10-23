@@ -50,5 +50,5 @@ export function eraseCookie (name) {
  * Device tests
  */
 
-export const isPC = navigator.userAgent.indexOf('Mac OS X') === -1;
-export const isMac = navigator.userAgent.indexOf('Mac OS X') !== -1;
+export const isPC = typeof document !== 'undefined' ? navigator.userAgent.indexOf('Mac OS X') === -1 : true;
+export const isMac = typeof document !== 'undefined' ? navigator.userAgent.indexOf('Mac OS X') !== -1 : false;
