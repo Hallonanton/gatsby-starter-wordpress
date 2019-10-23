@@ -179,25 +179,21 @@ class Navbar extends Component {
                     {({ breakpoints, currentBreakpoint }) => 
                       breakpoints[currentBreakpoint] < breakpoints.md ? (
                         
-                        <Fragment>
-                          <MobileNav 
-                            mainLinks={mainmenu}
-                            secondaryLinks={socialmediaLinks}
-                            open={mobileMenuOpen}
-                            onToggleMenu={menuOpen =>
-                              this.handleToggleMobileMenu(menuOpen)
-                            }
-                          />
-                        </Fragment>
+                        <MobileNav 
+                          mainLinks={mainmenu}
+                          secondaryLinks={socialmediaLinks}
+                          open={mobileMenuOpen}
+                          onToggleMenu={menuOpen =>
+                            this.handleToggleMobileMenu(menuOpen)
+                          }
+                        />
 
                       ) : (
 
-                        <Fragment>
-                          <DesktopNav 
-                            mainLinks={mainmenu}
-                            secondaryLinks={socialmediaLinks}
-                          />
-                        </Fragment>
+                        <DesktopNav 
+                          mainLinks={mainmenu}
+                          secondaryLinks={socialmediaLinks}
+                        />
 
                       )
                     }
