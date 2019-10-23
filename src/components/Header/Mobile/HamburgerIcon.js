@@ -59,6 +59,7 @@ const Hamburger = styled('span')`
   width: 35px;
   height: 30px;
   cursor: pointer;
+  user-select: none;
   z-index: 3;
 
   .menu-row {

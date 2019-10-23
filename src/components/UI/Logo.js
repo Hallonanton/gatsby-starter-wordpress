@@ -13,6 +13,7 @@ const StyledLink = styled(Link)`
 	width: 130px;
 	flex-shrink: 0;
 	text-decoration: none;
+	user-select: none;
 	z-index: 3;
 
 	svg, img {
