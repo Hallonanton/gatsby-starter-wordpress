@@ -44,3 +44,11 @@ export function eraseCookie (name) {
     	document.cookie = name+'=; Max-Age=-99999999;';  
 	}
 }
+
+
+/*
+ * Device tests
+ */
+
+export const isPC = navigator.userAgent.indexOf('Mac OS X') === -1;
+export const isMac = navigator.userAgent.indexOf('Mac OS X') !== -1;
