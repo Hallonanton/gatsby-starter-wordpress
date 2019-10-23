@@ -176,15 +176,8 @@ class Navbar extends Component {
                 <StyledContainer maxWidth>
                   <Media>
                     {({ breakpoints, currentBreakpoint }) => 
-                      breakpoints[currentBreakpoint] >= breakpoints.md ? (
+                      breakpoints[currentBreakpoint] < breakpoints.md ? (
                         
-                        <DesktopNav 
-                          mainLinks={mainmenu}
-                          secondaryLinks={socialmediaLinks}
-                        />
-
-                      ) : (
-
                         <MobileNav 
                           mainLinks={mainmenu}
                           secondaryLinks={socialmediaLinks}
@@ -192,6 +185,13 @@ class Navbar extends Component {
                           onToggleMenu={menuOpen =>
                             this.handleToggleMobileMenu(menuOpen)
                           }
+                        />
+
+                      ) : (
+
+                        <DesktopNav 
+                          mainLinks={mainmenu}
+                          secondaryLinks={socialmediaLinks}
                         />
 
                       )
