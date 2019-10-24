@@ -73,24 +73,26 @@ export const SiteMetaQuery = graphql`
 
 export const Header = graphql`
   fragment Header on Query {
-    allDataJson {
-      edges {
-        node {
-          mainmenu {
-            title
-            to
-            submenu {
-              title
-              to
-            }
-          }
-          socialmedia {
-            Facebook
-            Instagram
-            Twitter
-            LinkedIn
-            Youtube
-          }
+    wordpressMenusMenusItems(name: {eq: "Huvudmeny"}) {
+      name
+      items {
+        title
+        url
+        target
+        child_items {
+          title
+          url
+          target
+        }
+      }
+    }
+    wordpressAcfOptions {
+      options {
+        ...Logo
+        socialmedia {
+          Facebook
+          Instagram
+          Twitter
         }
       }
     }
@@ -99,30 +101,43 @@ export const Header = graphql`
 
 export const Footer = graphql`
   fragment Footer on Query {
-    allDataJson(filter: {
-      footermenu: {
-        elemMatch: {
-          links: {
-            elemMatch: {
-              title: {ne: null}
+    allWordpressAcfOptions {
+      edges {
+        node {
+          options {
+            ...Logo
+            footermenu {
+              title
+              content {              
+                title
+                link {
+                  title
+                  url
+                  target
+                }
+              }
+            }
+            bottommenu {
+              link {
+                title
+                url
+                target
+              }
             }
           }
         }
       }
-    }) {
-      edges {
-        node {
-          footermenu {
-            title
-            links {
-              type
-              title
-              to
-            }
-          }
-          bottommenu {
-            title
-            to
+    }
+  }
+`
+
+export const Logo = graphql`
+  fragment Logo on wordpress__acf_optionsOptions {
+    logo {
+      localFile {
+        childImageSharp {
+          fixed(height: 50) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
@@ -132,14 +147,14 @@ export const Footer = graphql`
 
 export const CookieConsent = graphql`
   fragment CookieConsent on Query {
-    allDataJson(
-      filter: {
-        integritypage: {ne: null}
-      }
-    ) {
+    allWordpressAcfOptions {
       edges {
         node {
-          integritypage
+          options {
+            integritypage {
+              permalink
+            }
+          }
         }
       }
     }
