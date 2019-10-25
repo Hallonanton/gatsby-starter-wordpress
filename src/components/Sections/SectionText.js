@@ -26,12 +26,12 @@ class SectionText extends Component {
 
   render () {
 
-    let { isH1, title, textBody } = this.props
+    let { isH1, title, text } = this.props
 
     return (
       <Wrapper>
         <Mega size={isH1 ? "h1" : "h2"}>{title}</Mega>
-        <StyledText content={textBody} small />
+        <StyledText content={text} small />
       </Wrapper>
     )
   }

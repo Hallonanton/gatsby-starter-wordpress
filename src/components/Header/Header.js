@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Container from '../UI/Grid'
 import MobileNav from './Mobile/MobileNav'
 import DesktopNav from './Desktop/DesktopNav'
+import { replaceKeysDeep } from '../../utility/functions'
 
 import Facebook from '../../img/social/facebook.svg'
 import Twitter from '../../img/social/twitter.svg'
@@ -143,25 +144,22 @@ class Navbar extends Component {
         `}
         render={data => {
 
-          let mainmenu = null
-          let socialmedia = null
+          const { wordpressAcfOptions, wordpressMenusMenusItems } = data
+          const rawSocialmediaLinks = wordpressAcfOptions.options.socialmedia
+
+          let mainmenu = wordpressMenusMenusItems && wordpressMenusMenusItems.items ? replaceKeysDeep( wordpressMenusMenusItems.items, {url: 'to', child_items: 'submenu'} ): null
           let socialmediaLinks = []
 
-          data.allDataJson.edges.forEach(item => {
-            mainmenu = item.node.mainmenu ? item.node.mainmenu : mainmenu
-            socialmedia = item.node.socialmedia ? item.node.socialmedia : socialmedia
-          })
-
-          if ( socialmedia ) {
-            for (let key in socialmedia) {
-              if ( socialmedia.hasOwnProperty(key) && socialmedia[key]) {
+          if ( rawSocialmediaLinks ) {
+            for (let key in rawSocialmediaLinks) {
+              if ( rawSocialmediaLinks.hasOwnProperty(key) && rawSocialmediaLinks[key]) {
 
                 const title = key
                 const Icon = this.getIcon(title)
 
                 socialmediaLinks.push({
                   title: title,
-                  to: socialmedia[key],
+                  to: rawSocialmediaLinks[key],
                   icon: <Icon />,
                   target: true
                 })

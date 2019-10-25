@@ -21,10 +21,11 @@ export const useSiteMetadata = () => {
 const SiteMetadata = () => {
 
   const theme = useTheme()
-  const { site, favicon, ogImage } = useSiteMetadata()
-  const { sitename, title, titleSuffix, description } = site.siteMetadata
+  const { site, favicon, ogImage, allWordpressSiteMetadata } = useSiteMetadata()
+  const { sitename, titleSuffix } = site.siteMetadata
+  const { name, description } = allWordpressSiteMetadata.edges[0].node
   const favicons = favicon.edges[0] ? favicon.edges[0].node : null
-  const finalTitle = `${title} ${titleSuffix} ${sitename}`
+  const finalTitle = `${name} ${titleSuffix} ${sitename}`
 
   return (
     <Helmet>
@@ -43,7 +44,7 @@ const SiteMetadata = () => {
 
       <meta name="theme-color" content={theme.colors.bg} />
       <meta property="og:site_name" content={sitename} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={name} />
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="sv_SE" />
 

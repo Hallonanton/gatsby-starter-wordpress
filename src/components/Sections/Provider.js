@@ -10,6 +10,28 @@ import SectionTextCards from './SectionTextCards'
   # Component
 ==============================================================================*/
 
+
+export const PrepareProvider = props => {
+
+  let sections = []
+
+   if ( props ) {
+    for (var prop in props) {
+      if (Object.prototype.hasOwnProperty.call(props, prop)) {
+        if ( prop.includes('childWordPressAcf') ) {
+          sections.push({
+            sectionKey: prop.replace('childWordPressAcf', ''),
+            ...props[prop]
+          })
+        }
+      }
+    }
+  }
+
+  return sections
+}
+
+
 class Provider extends Component {
 
   state = {

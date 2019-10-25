@@ -135,18 +135,15 @@ const SingleArticle = ({ data }) => {
 export default SingleArticle
 
 export const articleQuery = graphql`
-  query ArticlePostTemplate($id: String!, $category: [String]) {
-    markdownRemark(id: { eq: $id }) {
-      ...ArticlePageFragment
+  query ArticlePostTemplate($id: String!, $category: [Int]) {
+    wordpressWpArticleCategory(id: {eq: $id}) {
+      ...ArticleCardFragment
     }
-    allMarkdownRemark(
+    allWordpressWpArticle(
       limit: 3
-      filter: { 
+      filter: {
         id: { ne: $id }
-        frontmatter: { 
-          templateKey: { eq: "SingleArticle" }
-          categories: { in: $category }
-        } 
+        article_category: {in: $category }
       }
     ) {
       edges {

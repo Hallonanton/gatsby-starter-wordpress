@@ -63,30 +63,31 @@ const Text = styled('p')`
 class ArticleCard extends Component {
 
   render () {
-
-    const post = this.props.post.node
-    let link = post.fields.slug
-    let { excerpt, frontmatter } = post
-    let { title, description, featuredimage } = frontmatter
-    let text = description || excerpt
+    const post = this.props.post.article[0]
+    let link = post.permalink
+    let title = post.post_title
+    let text = post.acf.description
+    let featuredimage = post.acf.featured_image
 
     return (
       <Card>
         <StyledLink to={link}>
-          <Img 
-            fixed={featuredimage.childImageSharp.fixed}
-            alt={title}
-            style={{
-              position: 'relative',
-              width: '100%',
-              height: 'auto',
-              paddingBottom: '100%'
-            }}
-            imgStyle={{
-              position: 'absolute',
-              width: '100%'
-            }}
-          />
+          {featuredimage && featuredimage.localfile &&
+            <Img 
+              fixed={featuredimage.localfile.childImageSharp.fixed}
+              alt={title}
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: 'auto',
+                paddingBottom: '100%'
+              }}
+              imgStyle={{
+                position: 'absolute',
+                width: '100%'
+              }}
+            />
+          }
           <Content>
             <SubHeading>{title}</SubHeading>
             <Text>{text}</Text>

@@ -1,3 +1,4 @@
+import _ from 'lodash'
 
 /*
  * Get and set global vaiables
@@ -52,3 +53,17 @@ export function eraseCookie (name) {
 
 export const isPC = typeof document !== 'undefined' ? navigator.userAgent.indexOf('Mac OS X') === -1 : true;
 export const isMac = typeof document !== 'undefined' ? navigator.userAgent.indexOf('Mac OS X') !== -1 : false;
+
+
+/*
+ * Replace keys in nested object
+ */
+
+export const replaceKeysDeep = (obj, keysMap) => { // keysMap = { oldKey1: newKey1, oldKey2: newKey2, etc...
+  return _.transform(obj, function(result, value, key) { // transform to a new object
+
+    var currentKey = keysMap[key] || key; // if the key is in keysMap use the replacement, if not use the original key
+
+    result[currentKey] = _.isObject(value) ? replaceKeysDeep(value, keysMap) : value; // if the key is an object run it through the inner function - replaceKeys
+  });
+}

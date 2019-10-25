@@ -50,13 +50,13 @@ const ListItem = styled('li')`
   # Component
 ==============================================================================*/
 
-const Item = ({title, to, target, ...rest}) => {
+const Item = ({title, link, ...rest}) => {
 
-  if ( to ) {
+  if ( link ) {
     return (
 
       <ListItem {...rest}>
-        <Link to={to} target={target}>{title}</Link>
+        <Link to={link.url} target={link.target}>{link.title}</Link>
       </ListItem>
 
     )

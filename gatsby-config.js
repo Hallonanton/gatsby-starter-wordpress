@@ -4,7 +4,8 @@ const wordpressUrl = 'wordpress.eksjobilaffar.dev.oas.nu'
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
+    sitename: 'Gatsby + Wordpress',
+    titleSuffix: '|',
     siteUrl: `${protocol}://${wordpressUrl}`,
     wordpressUrl: `${protocol}://${wordpressUrl}`,
   },
@@ -14,6 +15,34 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-emotion',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/src/img`,
+        name: 'images',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+          rule: {
+            include: `${__dirname}/src/img`
+          }
+      }
+    },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 2048,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: "gatsby-source-wordpress",
       options: {

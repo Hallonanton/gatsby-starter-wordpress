@@ -41,41 +41,19 @@ class SectionArticles extends Component {
           }
         `}
         render={data => {
-          
-          let { category, isH1, title } = this.props
-          let posts = data.allMarkdownRemark.edges
-          let postsIndex = 0
-
-          posts = posts.filter((post) => {
-                  
-            let show = true
-
-            //Filter
-            if ( category && !post.node.frontmatter.categories.includes(category) ) { 
-              show = false
-            }
-
-            //Counter
-            if ( show && postsIndex < 3 ) {
-              postsIndex++
-            }
-
-            return show
-             
-          })
+            
+          let { isH1, title, articles } = this.props
 
           return (
             <Wrapper>
               <Mega size={isH1 ? "h1" : "h2"}>{title}</Mega>
 
-              {posts && posts.length > 0 ? (
-
+              {articles && articles.length > 0 ? (
                 <StyledArticleCardContainer>
-                {posts.map((post, i) => (
+                {articles.map((post, i) => (
                   <ArticleCard key={i} post={post} />
                 ))}
                 </StyledArticleCardContainer>
-
               ) : (
                 <NoResult>Inga artiklar hittades</NoResult>
               )}

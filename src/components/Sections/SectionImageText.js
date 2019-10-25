@@ -55,23 +55,25 @@ class SectionImageText extends Component {
 
   render () {
 
-    let { isH1, title, text, alignment, imageHalf } = this.props
+    let { isH1, title, text, image_alignment, image } = this.props
 
     return (
       <Wrapper>
           
           <Row>
-            <Col order={alignment === 'left' ? 1 : 2}>
-              <Img 
-                fluid={imageHalf.childImageSharp.fluid}
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '550px',
-                }}
-              />
+            <Col order={image_alignment === 'left' ? 1 : 2}>
+              {image && image.localfile && image.localfile.childImageSharp &&
+                <Img 
+                  fluid={image.localfile.childImageSharp.fluid}
+                  style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '550px',
+                  }}
+                />
+              }
             </Col>
-            <Col order={alignment === 'right' ? 1 : 2}>
+            <Col order={image_alignment === 'right' ? 1 : 2}>
               <Mega size={isH1 ? "h1" : "h2"}>{title}</Mega>
               <StyledText content={text} small />
             </Col>

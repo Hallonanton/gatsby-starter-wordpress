@@ -1,13 +1,23 @@
 import { graphql } from "gatsby"
 
+
+/*==============================================================================
+  # Fragments
+==============================================================================*/
+
 export const SiteMetaQuery = graphql`
   fragment SiteMetaQuery on Query {
     site {
       siteMetadata {
-        sitename
-        title
         titleSuffix
-        description
+      }
+    }
+    allWordpressSiteMetadata {
+      edges {
+        node {
+          name
+          description        
+        }
       }
     }
     favicon: allFile(filter: {
@@ -77,12 +87,12 @@ export const Header = graphql`
       name
       items {
         title
-        url
         target
+        url
         child_items {
           title
-          url
           target
+          url
         }
       }
     }
@@ -112,16 +122,16 @@ export const Footer = graphql`
                 title
                 link {
                   title
-                  url
                   target
+                  url
                 }
               }
             }
             bottommenu {
               link {
                 title
-                url
                 target
+                url
               }
             }
           }
@@ -162,36 +172,64 @@ export const CookieConsent = graphql`
 `
 
 export const PageSectionsFragment = graphql`
-  fragment PageSectionsFragment on MarkdownRemark {
-    frontmatter {
+  fragment PageSectionsFragment on wordpress__PAGE {
+    title
+    yoast_meta {
+      meta_title
+      meta_description
+      meta_canonical
+    }
+    childWordPressAcfSectionText {
+      __typename
       title
-      sections {
-        sectionKey
+      text
+    }
+    childWordPressAcfSectionImageText {
+      __typename
+      title
+      text
+      link {
         title
-        textBody
-        alignment
-        link {
-          title
-          to
-        }
-        text
-        category
-        cards {
-          text
-          title
-          link {
-            title
-            to
-          }
-        }
-        imageHalf {
+        target
+        url
+      }
+      image {
+        localFile {
           childImageSharp {      
             fluid(maxWidth: 600, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
         }
-        imageFull {
+      }
+      image_alignment
+    }
+    childWordPressAcfSectionArticles {
+      __typename
+      articles {
+        article {
+          post_title
+          permalink
+          acf {
+            description
+            content
+            featured_image {
+              localFile {
+                childImageSharp {
+                  fixed(width: 300, height: 300) {
+                    ...GatsbyImageSharpFixed
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    childWordPressAcfSectionImage {
+      __typename
+      image {
+        localFile {
           childImageSharp {      
             fluid(maxWidth: 1200, quality: 100) {
               ...GatsbyImageSharpFluid
@@ -199,23 +237,29 @@ export const PageSectionsFragment = graphql`
           }
         }
       }
-      ...Meta
+    }
+    childWordPressAcfSectionTextCards {
+      __typename
+      cards {
+        title
+        text
+        link {
+          title
+          target
+          url
+        }
+      }
     }
   }
 `
 
 export const AllArticles = graphql`
   fragment AllArticles on Query {
-    allMarkdownRemark(
-      filter: { 
-        frontmatter: { 
-          templateKey: { eq: "SingleArticle" } 
-        }
-      }
+    allWordpressWpArticle(
       sort: {
-        fields: [frontmatter___date, frontmatter___title]
+        fields: [date, title]
         order: [DESC, ASC]
-      } 
+      }
     ) {
       edges {
         node {
@@ -227,22 +271,27 @@ export const AllArticles = graphql`
 `
 
 export const ArticleCardFragment = graphql`
-  fragment ArticleCardFragment on MarkdownRemark {
-    id
-    excerpt(pruneLength: 150)
-    rawMarkdownBody
-    fields {
-      slug
-    }
-    frontmatter {
-      title
-      categories
+  fragment ArticleCardFragment on Node {
+    ... on wordpress__wp_article {
+      id
+      link
       date(formatString: "YYYY-MM-DD")
-      description
-      featuredimage {
-        childImageSharp {
-          fixed(width: 300, height: 300) {
-            ...GatsbyImageSharpFixed
+      cpt_categories {
+        taxonomy 
+        name
+        slug
+        link
+      }
+      acf {
+        description
+        content
+        featured_image {
+          localFile {
+            childImageSharp {
+              fixed(width: 300, height: 300) {
+                ...GatsbyImageSharpFixed
+              }
+            }
           }
         }
       }
@@ -251,31 +300,30 @@ export const ArticleCardFragment = graphql`
 `
 
 export const ArticlePageFragment = graphql`
-  fragment ArticlePageFragment on MarkdownRemark {
-    id
-    html
-    frontmatter {
+  fragment ArticlePageFragment on Query {
+    wordpressWpArticle {
+      id
       title
-      categories
       date(formatString: "YYYY-MM-DD")
-      description
-      featuredimage {
-        childImageSharp {      
-          fluid(maxWidth: 1200, quality: 100) {
-            ...GatsbyImageSharpFluid
+      article_category
+      yoast_meta {
+        meta_title
+        meta_description
+        meta_canonical
+      }
+      acf {
+        description
+        content
+        featured_image {
+          localFile {
+            childImageSharp {      
+              fluid(maxWidth: 1200, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
           }
         }
       }
-      ...Meta
-    }
-  }
-`
-
-export const MetaFragment = graphql`
-  fragment Meta on Frontmatter {
-    meta {
-      metaDescription
-      metaTitle
     }
   }
 `

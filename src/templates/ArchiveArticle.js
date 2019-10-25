@@ -189,16 +189,13 @@ export default ArchiveCategory
 ==============================================================================*/
 
 export const categoryQuery = graphql`
-  query CategoryTemplate($category: [String]) {
-    allMarkdownRemark(
+  query CategoryTemplate($category: [Int]) {
+    allWordpressWpArticle(
       filter: { 
-        frontmatter: { 
-          templateKey: { eq: "SingleArticle" }
-          categories: { in: $category }
-        } 
+        article_category: { in: $category }
       }
       sort: {
-        fields: [frontmatter___date, frontmatter___title]
+        fields: [date, title]
         order: [DESC, ASC]
       }
     ) {

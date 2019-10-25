@@ -136,11 +136,11 @@ class CookieConsent extends Component {
         `}
         render={data => {
 
-          const integritypageLink = data.allDataJson.edges[0].node.integritypage
+          const integritypageLink = data.allWordpressAcfOptions.edges[0].node.options.integritypage
 
           return (
             <Wrapper className={animateOut ? 'animate-out' : ''}>
-              <Text>Vi använder cookies för att ge dig bästa möjliga webbplatsupplevelse. Genom att använda webbplatsnamn godkänner du vår <Link to={`/${integritypageLink}`}>integritetspolicy.</Link></Text>
+              <Text>Vi använder cookies för att ge dig bästa möjliga webbplatsupplevelse. Genom att använda webbplatsnamn godkänner du vår <Link to={`/${integritypageLink.url}`}>integritetspolicy.</Link></Text>
               <StyledButton
                 onClick={e => this.onAllow(e)}
               >

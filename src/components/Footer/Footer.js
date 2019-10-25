@@ -6,6 +6,7 @@ import { StyledLink } from '../Navigation/NavigationItem'
 import Container from '../UI/Grid'
 import Logo from '../UI/Logo'
 import InfoList from './InfoList'
+import { replaceKeysDeep } from '../../utility/functions'
 
 
 /*==============================================================================
@@ -82,8 +83,12 @@ class Footer extends Component {
         `}
         render={data => {
 
-          let footermenu = data.allDataJson.edges[0].node.footermenu
-          let bottomLinks = data.allDataJson.edges[0].node.bottommenu
+          let { logo, footermenu, bottommenu } = data.allWordpressAcfOptions.edges[0].node.options
+
+          if ( bottommenu ) {
+            bottommenu = bottommenu.map( item => item.link )
+            bottommenu = replaceKeysDeep(bottommenu, {url: 'to'})
+          }
 
           return (
             <FooterWrapper>
@@ -98,7 +103,7 @@ class Footer extends Component {
                       <InfoList 
                         key={i}
                         title={item.title}
-                        items={item.links}
+                        items={item.content}
                       />
                     ))}
                   </NavigationContainer>
@@ -106,7 +111,7 @@ class Footer extends Component {
                 </FooterRow>
 
                 <BottomRow>
-                  <DiscreetNav links={bottomLinks} />
+                  <DiscreetNav links={Object.values(bottommenu)} />
                 </BottomRow>
 
               </Container>

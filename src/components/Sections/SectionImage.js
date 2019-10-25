@@ -21,12 +21,12 @@ class SectionImage extends Component {
 
   render () {
 
-    let { imageFull } = this.props
+    let { image } = this.props
 
-    return imageFull && imageFull.childImageSharp ? (
+    return image && image.localfile && image.localfile.childImageSharp ? (
       <Wrapper>
         <Img 
-          fluid={imageFull.childImageSharp.fluid}
+          fluid={image.localfile.childImageSharp.fluid}
           style={{
             position: 'relative',
             width: '100%',
