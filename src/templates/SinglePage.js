@@ -7,12 +7,9 @@ import Container from '../components/UI/Grid'
 
 export class PageTemplate extends Component {
   render() {
-
-    console.log( this.props )
-
     return (
       <Container>
-        <Provider sections={PrepareProvider( this.props )} />
+        <Provider sections={PrepareProvider( this.props.acf.sections_page )} />
       </Container>
     )
   }

@@ -83,7 +83,7 @@ class Footer extends Component {
         `}
         render={data => {
 
-          let { logo, footermenu, bottommenu } = data.allWordpressAcfOptions.edges[0].node.options
+          let { footermenu, bottommenu } = data.allWordpressAcfOptions.edges[0].node.options
 
           if ( bottommenu ) {
             bottommenu = bottommenu.map( item => item.link )

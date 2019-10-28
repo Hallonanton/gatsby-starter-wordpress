@@ -76,34 +76,29 @@ export class ArchiveTemplate extends Component {
       return posts
     }
 
+
     return posts.filter(node => {
 
       let { node: post } = node
 
       if ( search ) {
 
-        let { title, description } = post.frontmatter
+        let { title } = post
+        let { description, content } = post.acf
 
-        const excerpt = post.excerpt && post.excerpt.toLowerCase()
-        const body = post.rawMarkdownBody && post.rawMarkdownBody.toLowerCase()
         search = search.toLowerCase()
         title = title && title.toLowerCase()
+        content = content && content.toLowerCase()
         description = description && description.toLowerCase()
-
-        if ( body ) {
-          if ( body.includes(search)) {
-            return true
-          }
-        }
-
-        if ( excerpt ) {
-          if ( excerpt.includes(search)) {
-            return true
-          }
-        }
 
         if ( title ) {
           if ( title.includes(search) ) {
+            return true
+          }
+        }
+
+        if ( content ) {
+          if ( content.includes(search)) {
             return true
           }
         }
@@ -140,7 +135,7 @@ export class ArchiveTemplate extends Component {
 
             <ArticleCardContainer>
               {posts.filter((post, i) => i < (offset+perPage) ).map((post, i) => (
-                <ArticleCard key={i} post={post} />
+                <ArticleCard key={i} post={post.node} />
               ))}
             </ArticleCardContainer>
 
@@ -164,10 +159,10 @@ export class ArchiveTemplate extends Component {
 
 const ArchiveCategory = ({ data, pageContext }) => {
 
-  const posts = data.allMarkdownRemark.edges
-  const title = `Artiklar i kategorin ${pageContext.category}`
+  const posts = data.allWordpressWpArticle.edges
+  const title = `Artiklar i kategorin ${pageContext.categoryName}`
   let metaData = {
-    metaTitle: pageContext.category
+    meta_title: pageContext.categoryName
   }
 
   return (

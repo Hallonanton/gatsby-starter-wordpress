@@ -30,6 +30,7 @@ module.exports = `
 	      node {
 	        id
 	        slug
+	        name
 	        link
 	      }
 	    }

@@ -133,6 +133,7 @@ exports.createPages = ({ actions, graphql }) => {
               component: slash(taxonomi.template),
               context: {
                 id: edge.node.id,
+                categoryName: edge.node.name
               },
             })
           }) 

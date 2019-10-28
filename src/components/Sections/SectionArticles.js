@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { StaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import { Mega, SmallHeading } from '../UI/Headings'
 import ArticleCard, { ArticleCardContainer } from '../UI/ArticleCard'
@@ -33,35 +32,24 @@ const NoResult = styled(SmallHeading)`
 class SectionArticles extends Component {
 
   render () {
+
+    let { isH1, title, articles } = this.props
+
     return (
-      <StaticQuery
-        query={graphql`
-          query SectionArticlesQuery {
-            ...AllArticles
-          }
-        `}
-        render={data => {
-            
-          let { isH1, title, articles } = this.props
+      <Wrapper>
+        <Mega size={isH1 ? "h1" : "h2"}>{title}</Mega>
 
-          return (
-            <Wrapper>
-              <Mega size={isH1 ? "h1" : "h2"}>{title}</Mega>
+        {articles && articles.length > 0 ? (
+          <StyledArticleCardContainer>
+          {articles.map((post, i) => (
+            <ArticleCard key={i} post={post.article[0]} />
+          ))}
+          </StyledArticleCardContainer>
+        ) : (
+          <NoResult>Inga artiklar hittades</NoResult>
+        )}
 
-              {articles && articles.length > 0 ? (
-                <StyledArticleCardContainer>
-                {articles.map((post, i) => (
-                  <ArticleCard key={i} post={post} />
-                ))}
-                </StyledArticleCardContainer>
-              ) : (
-                <NoResult>Inga artiklar hittades</NoResult>
-              )}
-
-            </Wrapper>
-          )
-        }}
-      />
+      </Wrapper>
     )
   }
 }

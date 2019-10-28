@@ -11,23 +11,10 @@ import SectionTextCards from './SectionTextCards'
 ==============================================================================*/
 
 
-export const PrepareProvider = props => {
-
-  let sections = []
-
-   if ( props ) {
-    for (var prop in props) {
-      if (Object.prototype.hasOwnProperty.call(props, prop)) {
-        if ( prop.includes('childWordPressAcf') ) {
-          sections.push({
-            sectionKey: prop.replace('childWordPressAcf', ''),
-            ...props[prop]
-          })
-        }
-      }
-    }
+export const PrepareProvider = sections => {
+  if ( sections && Array.isArray(sections) ) {
+    sections.map(section => section.sectionKey = section.__typename.replace('WordPressAcf_','') )
   }
-
   return sections
 }
 

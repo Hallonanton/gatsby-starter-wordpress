@@ -23,10 +23,10 @@ class SectionImage extends Component {
 
     let { image } = this.props
 
-    return image && image.localfile && image.localfile.childImageSharp ? (
+    return image && image.localFile && image.localFile.childImageSharp ? (
       <Wrapper>
         <Img 
-          fluid={image.localfile.childImageSharp.fluid}
+          fluid={image.localFile.childImageSharp.fluid}
           style={{
             position: 'relative',
             width: '100%',

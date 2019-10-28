@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import _ from 'lodash'
 import { graphql, Link } from 'gatsby'
-import Img from "gatsby-image"
+import Img from 'gatsby-image'
 import styled from '@emotion/styled'
 import Layout from '../components/Layout/Layout'
 import PageMetadata from '../components/Layout/PageMetadata'
@@ -39,6 +38,11 @@ const StyledText = styled(Text)`
   margin: 40px 0px;
 `
 
+const Wrapper = styled('div')`
+  width: 100%;
+  text-align: center;
+`
+
 
 /*==============================================================================
   # Components
@@ -48,16 +52,17 @@ export class ArticlePostTemplate extends Component {
 
   render() {
 
-    const { categories, title, date, description, featuredimage, html } = this.props
+    const { title, date, cpt_categories } = this.props
+    const { description, featured_image, content } = this.props.acf
 
     return (
       <StyledContainer>
         
         <CategoryList>
-          {categories.map((category, i) => (
-            <Fragment>
+          {cpt_categories.filter(item => item.taxonomy === 'article_category').map((category, i) => (
+            <Fragment key={i}>
               {i ? (', ') : null}
-              <Link key={i} to={`/artiklar/${_.kebabCase(category)}/`}>{category}</Link>
+              <Link to={category.link}>{category.name}</Link>
             </Fragment>
           ))}
         </CategoryList>
@@ -68,17 +73,19 @@ export class ArticlePostTemplate extends Component {
 
         <StyledText small content={description} />
 
-        <Img 
-          fluid={featuredimage.childImageSharp.fluid}
-          alt={title}
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '550px',
-          }}
-        />
+        {featured_image && featured_image.localFile &&
+          <Img 
+            fluid={featured_image.localFile.childImageSharp.fluid}
+            alt={title}
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '550px',
+            }}
+          />
+        }
 
-        <StyledText replace={false} content={html} />
+        <StyledText replace={false} content={content} />
 
       </StyledContainer>
     )
@@ -87,19 +94,19 @@ export class ArticlePostTemplate extends Component {
 
 const SingleArticle = ({ data }) => {
 
-  const { html, frontmatter } = data.markdownRemark
-  const posts = data.allMarkdownRemark.edges
-  let metaData = frontmatter.meta
+  let article = data.wordpressWpArticle
+  const posts = data.allWordpressWpArticle.edges
+  let metaData = article.yoast_meta
 
-  if ( !metaData || (metaData && !metaData.metaTitle) ) {
+  if ( !metaData || (metaData && !metaData.meta_title) ) {
     if ( !metaData ) {
       metaData = {}
     }
-    if ( !metaData.metaTitle ) {
-      metaData.metaTitle = frontmatter.title
+    if ( !metaData.meta_title ) {
+      metaData.meta_title = article.title
     }
-    if ( !metaData.metaDescription ) {
-      metaData.metaDescription = frontmatter.description
+    if ( !metaData.meta_description ) {
+      metaData.meta_description = article.acf.description
     }
   }
 
@@ -107,24 +114,24 @@ const SingleArticle = ({ data }) => {
     <Layout>
       <PageMetadata {...metaData} />
 
-      <ArticlePostTemplate html={html} {...frontmatter} />
+      <ArticlePostTemplate {...article} />
 
       <StyledContainer>
 
         <Divider mt={'25px'} mb={'60px'} />
 
         {posts && posts.length > 0 ? (
-          <Fragment>
+          <Wrapper>
 
             <Heading>Liknande artiklar</Heading>
 
             <ArticleCardContainer>
               {posts.map((post, i) => (
-                <ArticleCard key={i} post={post} />
+                <ArticleCard key={i} post={post.node} />
               ))}
             </ArticleCardContainer>
 
-          </Fragment>
+          </Wrapper>
         ) : null}
 
       </StyledContainer>
@@ -136,8 +143,8 @@ export default SingleArticle
 
 export const articleQuery = graphql`
   query ArticlePostTemplate($id: String!, $category: [Int]) {
-    wordpressWpArticleCategory(id: {eq: $id}) {
-      ...ArticleCardFragment
+    wordpressWpArticle(id: {eq: $id}) {
+      ...ArticlePageFragment
     }
     allWordpressWpArticle(
       limit: 3

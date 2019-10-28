@@ -9,6 +9,7 @@ export const SiteMetaQuery = graphql`
   fragment SiteMetaQuery on Query {
     site {
       siteMetadata {
+        sitename
         titleSuffix
       }
     }
@@ -98,7 +99,6 @@ export const Header = graphql`
     }
     wordpressAcfOptions {
       options {
-        ...Logo
         socialmedia {
           Facebook
           Instagram
@@ -115,7 +115,6 @@ export const Footer = graphql`
       edges {
         node {
           options {
-            ...Logo
             footermenu {
               title
               content {              
@@ -142,12 +141,21 @@ export const Footer = graphql`
 `
 
 export const Logo = graphql`
-  fragment Logo on wordpress__acf_optionsOptions {
-    logo {
-      localFile {
-        childImageSharp {
-          fixed(height: 50) {
-            ...GatsbyImageSharpFixed
+  fragment Logo on Query {
+    allWordpressAcfOptions {
+      edges {
+        node {
+          options {
+            logo {
+              alt_text
+              localFile {
+                childImageSharp {
+                  fixed(height: 50) {
+                    ...GatsbyImageSharpFixed
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -162,7 +170,7 @@ export const CookieConsent = graphql`
         node {
           options {
             integritypage {
-              permalink
+              link
             }
           }
         }
@@ -179,45 +187,31 @@ export const PageSectionsFragment = graphql`
       meta_description
       meta_canonical
     }
-    childWordPressAcfSectionText {
-      __typename
-      title
-      text
+    acf {
+      ...AcfSections
     }
-    childWordPressAcfSectionImageText {
+  }
+`
+
+export const AcfSections = graphql`
+  fragment AcfSections on wordpress__PAGEAcf {
+    sections_page {
       __typename
-      title
-      text
-      link {
-        title
-        target
-        url
-      }
-      image {
-        localFile {
-          childImageSharp {      
-            fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-      image_alignment
-    }
-    childWordPressAcfSectionArticles {
-      __typename
-      articles {
-        article {
-          post_title
-          permalink
-          acf {
-            description
-            content
-            featured_image {
-              localFile {
-                childImageSharp {
-                  fixed(width: 300, height: 300) {
-                    ...GatsbyImageSharpFixed
+      ...on WordPressAcf_SectionArticles {
+        __typename
+        articles {
+          article {
+            post_title
+            link
+            acf {
+              description
+              content
+              featured_image {
+                localFile {
+                  childImageSharp {
+                    fixed(width: 300, height: 300) {
+                      ...GatsbyImageSharpFixed
+                    }
                   }
                 }
               }
@@ -225,28 +219,53 @@ export const PageSectionsFragment = graphql`
           }
         }
       }
-    }
-    childWordPressAcfSectionImage {
-      __typename
-      image {
-        localFile {
-          childImageSharp {      
-            fluid(maxWidth: 1200, quality: 100) {
-              ...GatsbyImageSharpFluid
+      ...on WordPressAcf_SectionImage {
+        __typename
+        image {
+          localFile {
+            childImageSharp {      
+              fluid(maxWidth: 1200, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
             }
           }
         }
       }
-    }
-    childWordPressAcfSectionTextCards {
-      __typename
-      cards {
+      ...on WordPressAcf_SectionImageText { 
+        __typename
         title
         text
         link {
           title
           target
           url
+        }
+        image {
+          localFile {
+            childImageSharp {      
+              fluid(maxWidth: 600, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+        image_alignment
+      }
+      ...on WordPressAcf_SectionText {
+        __typename
+        title
+        text
+      }
+      ...on WordPressAcf_SectionTextCards {
+        __typename
+        cards {
+          title
+          text
+          link {
+            title
+            target
+            url
+          }
         }
       }
     }
@@ -274,12 +293,12 @@ export const ArticleCardFragment = graphql`
   fragment ArticleCardFragment on Node {
     ... on wordpress__wp_article {
       id
+      title
       link
       date(formatString: "YYYY-MM-DD")
       cpt_categories {
         taxonomy 
         name
-        slug
         link
       }
       acf {
@@ -300,26 +319,28 @@ export const ArticleCardFragment = graphql`
 `
 
 export const ArticlePageFragment = graphql`
-  fragment ArticlePageFragment on Query {
-    wordpressWpArticle {
-      id
-      title
-      date(formatString: "YYYY-MM-DD")
-      article_category
-      yoast_meta {
-        meta_title
-        meta_description
-        meta_canonical
-      }
-      acf {
-        description
-        content
-        featured_image {
-          localFile {
-            childImageSharp {      
-              fluid(maxWidth: 1200, quality: 100) {
-                ...GatsbyImageSharpFluid
-              }
+  fragment ArticlePageFragment on wordpress__wp_article {
+    id
+    title
+    date(formatString: "YYYY-MM-DD")
+    cpt_categories {
+      taxonomy 
+      name
+      link
+    }
+    yoast_meta {
+      meta_title
+      meta_description
+      meta_canonical
+    }
+    acf {
+      description
+      content
+      featured_image {
+        localFile {
+          childImageSharp {      
+            fluid(maxWidth: 1200, quality: 100) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

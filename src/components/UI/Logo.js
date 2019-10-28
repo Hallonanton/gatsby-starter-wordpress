@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Link } from 'gatsby'
-import PlaceholderLogo from "../../img/logo.svg"
+import { Link, StaticQuery, graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 /*==============================================================================
   # Styles
@@ -27,9 +27,28 @@ const StyledLink = styled(Link)`
 ==============================================================================*/
 
 const Logo = () => (
-	<StyledLink to="/">
-      <PlaceholderLogo />
-    </StyledLink>	
+	<StaticQuery 
+		query={graphql`
+      query LogoQuery {
+        ...Logo
+      }
+    `}
+    render={data => {
+
+    	const { logo } = data.allWordpressAcfOptions.edges[0].node.options
+ 
+    	return (
+		    <StyledLink to="/">
+			    {logo && logo.localFile &&
+	          <Img 
+	            fixed={logo.localFile.childImageSharp.fixed}
+	            alt={logo.alt_text}
+	          />
+	        }
+			  </StyledLink>	
+    	)
+    }}
+	/>
 )
 
 export default Logo

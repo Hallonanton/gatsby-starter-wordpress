@@ -3,41 +3,24 @@ import styled from '@emotion/styled'
 import Img from "gatsby-image"
 import { Mega } from '../UI/Headings'
 import Text from '../UI/Text'
+import Container, { Row, Col } from '../UI/Grid'
 
 /*==============================================================================
   # Styles
 ==============================================================================*/
 
-const Wrapper = styled('div')`
-  width: 100%;
-  padding: 50px 0px;
+const StyledContainer = styled(Container)`
+  padding-top: 50px;
+  padding-bottom: 50px;
   text-align: center;
 `
 
-const Row = styled('div')`
+const StyledCol = styled(Col)`
   display: flex;
-  align-items: center;
-  margin-left: -15px;
-  margin-right: -15px;
-
-  ${({theme}) => theme.below.md} {
-    flex-direction: column;
-  }
-`
-
-const Col = styled('div')`
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
-  text-align: center;
-
-  &:first-of-type {
-    margin-bottom: 30px;
-  }
+  justify-content: center;
+  flex-direction: column;
 
   ${({theme}) => theme.above.md} {
-    width: 50%;
-    margin-bottom: 0px;
     order: ${({order}) => order};
   }
 `
@@ -58,13 +41,13 @@ class SectionImageText extends Component {
     let { isH1, title, text, image_alignment, image } = this.props
 
     return (
-      <Wrapper>
+      <StyledContainer>
           
           <Row>
-            <Col order={image_alignment === 'left' ? 1 : 2}>
-              {image && image.localfile && image.localfile.childImageSharp &&
+            <StyledCol col={12} md={6} order={image_alignment === 'left' ? 1 : 2}>
+              {image && image.localFile && image.localFile.childImageSharp &&
                 <Img 
-                  fluid={image.localfile.childImageSharp.fluid}
+                  fluid={image.localFile.childImageSharp.fluid}
                   style={{
                     position: 'relative',
                     width: '100%',
@@ -72,15 +55,15 @@ class SectionImageText extends Component {
                   }}
                 />
               }
-            </Col>
-            <Col order={image_alignment === 'right' ? 1 : 2}>
+            </StyledCol>
+            <StyledCol col={12} md={6} order={image_alignment === 'right' ? 1 : 2}>
               <Mega size={isH1 ? "h1" : "h2"}>{title}</Mega>
               <StyledText content={text} small />
-            </Col>
+            </StyledCol>
           </Row> 
 
 
-      </Wrapper>
+      </StyledContainer>
     )
   }
 }

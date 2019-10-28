@@ -7,9 +7,9 @@ import PageMetadata from '../components/Layout/PageMetadata'
 
 const ArchiveArticle = ({ data }) => {
 
-  const posts = data.allMarkdownRemark.edges
+  const posts = data.allWordpressWpArticle.edges
   let meta = {
-    metaTitle: 'Alla artiklar'
+    meta_title: 'Alla artiklar'
   }
 
   return (

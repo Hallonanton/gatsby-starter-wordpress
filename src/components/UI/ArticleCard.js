@@ -12,6 +12,7 @@ export const ArticleCardContainer = styled('ul')`
   display: grid;
   grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
   margin: 30px -15px -15px;
+  text-align: center;
 `
 
 const Card = styled('li')`
@@ -63,18 +64,18 @@ const Text = styled('p')`
 class ArticleCard extends Component {
 
   render () {
-    const post = this.props.post.article[0]
-    let link = post.permalink
-    let title = post.post_title
+    const { post } = this.props
+    let link = post.link
+    let title = post.post_title || post.title
     let text = post.acf.description
     let featuredimage = post.acf.featured_image
 
     return (
       <Card>
         <StyledLink to={link}>
-          {featuredimage && featuredimage.localfile &&
+          {featuredimage && featuredimage.localFile &&
             <Img 
-              fixed={featuredimage.localfile.childImageSharp.fixed}
+              fixed={featuredimage.localFile.childImageSharp.fixed}
               alt={title}
               style={{
                 position: 'relative',
