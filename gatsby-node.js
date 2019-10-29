@@ -158,23 +158,30 @@ exports.createPages = ({ actions, graphql }) => {
 
 //This will allow different fields to be left empty without causing a GraphQL error
 //The result will be that missing fields default to null instead on beaing declared as undefined
+
+//For flexible content use the dummy-page-template in wordpress instead to define the schema
+
+const AcfOptions = `
+  type wordpress__acf_options implements Node {
+    options: wordpress__acf_optionsOptions
+  }
+  type wordpress__acf_optionsOptions {
+    socialmedia: wordpress__acf_optionsOptionsSocialmedia
+    logo: wordpress__wp_media
+  }
+  type wordpress__acf_optionsOptionsSocialmedia {
+    Facebook: String
+    Instagram: String
+    LinkedIn: String
+    Twitter: String
+    Youtube: String
+  }
+`
+
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
-
-    type wordpress__acf_options implements Node {
-      options: wordpress__acf_optionsOptions
-    }
-    type wordpress__acf_optionsOptions {
-      socialmedia: wordpress__acf_optionsOptionsSocialmedia
-    }
-    type wordpress__acf_optionsOptionsSocialmedia {
-      Facebook: String
-      Instagram: String
-      LinkedIn: String
-      Twitter: String
-      Youtube: String
-    }
+    ${AcfOptions}
   `
   createTypes(typeDefs)
 }

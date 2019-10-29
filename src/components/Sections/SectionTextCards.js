@@ -24,15 +24,13 @@ class SectionTextCards extends Component {
 
     let { cards } = this.props
 
-    if ( cards.length < 0 ) { return false }
-
-    return (
+    return Array.isArray(cards) ? (
       <Wrapper>
         <TextCardContainer>
           {cards.map((card, i) => <TextCard key={i} {...card} />)}
         </TextCardContainer>
       </Wrapper>
-    )
+    ) : null
   }
 }
 

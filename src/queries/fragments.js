@@ -5,6 +5,10 @@ import { graphql } from "gatsby"
   # Fragments
 ==============================================================================*/
 
+/*
+ * General
+ */
+
 export const SiteMetaQuery = graphql`
   fragment SiteMetaQuery on Query {
     site {
@@ -179,98 +183,9 @@ export const CookieConsent = graphql`
   }
 `
 
-export const PageSectionsFragment = graphql`
-  fragment PageSectionsFragment on wordpress__PAGE {
-    title
-    yoast_meta {
-      meta_title
-      meta_description
-      meta_canonical
-    }
-    acf {
-      ...AcfSections
-    }
-  }
-`
-
-export const AcfSections = graphql`
-  fragment AcfSections on wordpress__PAGEAcf {
-    sections_page {
-      __typename
-      ...on WordPressAcf_SectionArticles {
-        __typename
-        articles {
-          article {
-            post_title
-            link
-            acf {
-              description
-              content
-              featured_image {
-                localFile {
-                  childImageSharp {
-                    fixed(width: 300, height: 300) {
-                      ...GatsbyImageSharpFixed
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      ...on WordPressAcf_SectionImage {
-        __typename
-        image {
-          localFile {
-            childImageSharp {      
-              fluid(maxWidth: 1200, quality: 100) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
-      ...on WordPressAcf_SectionImageText { 
-        __typename
-        title
-        text
-        link {
-          title
-          target
-          url
-        }
-        image {
-          localFile {
-            childImageSharp {      
-              fluid(maxWidth: 600, quality: 100) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        image_alignment
-      }
-      ...on WordPressAcf_SectionText {
-        __typename
-        title
-        text
-      }
-      ...on WordPressAcf_SectionTextCards {
-        __typename
-        cards {
-          title
-          text
-          link {
-            title
-            target
-            url
-          }
-        }
-      }
-    }
-  }
-`
+/*
+ * Articles
+ */
 
 export const AllArticles = graphql`
   fragment AllArticles on Query {
@@ -344,6 +259,129 @@ export const ArticlePageFragment = graphql`
             }
           }
         }
+      }
+    }
+  }
+`
+
+/*
+ * Pages and ACF-sections
+ */ 
+
+export const PageSectionsFragment = graphql`
+  fragment PageSectionsFragment on wordpress__PAGE {
+    title
+    yoast_meta {
+      meta_title
+      meta_description
+      meta_canonical
+    }
+    acf {
+      sections_page {
+        __typename
+        ...on Node {
+          ...on WordPressAcf_SectionArticles {
+            ...SectionArticles
+          }
+          ...on WordPressAcf_SectionImage {
+            ...SectionImage
+          }
+          ...on WordPressAcf_SectionImageText {
+            ...SectionImageText
+          }
+          ...on WordPressAcf_SectionText {
+            ...SectionText
+          }
+          ...on WordPressAcf_SectionTextCards {
+            ...SectionTextCards
+          }
+        }
+      }
+    }
+  }
+`
+
+export const SectionArticles = graphql`
+  fragment SectionArticles on WordPressAcf_SectionArticles {
+    __typename
+    articles {
+      article {
+        post_title
+        link
+        acf {
+          description
+          content
+          featured_image {
+            localFile {
+              childImageSharp {
+                fixed(width: 300, height: 300) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const SectionImage = graphql`
+  fragment SectionImage on WordPressAcf_SectionImage {
+    __typename
+    image {
+      localFile {
+        childImageSharp {      
+          fluid(maxWidth: 1200, quality: 100) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  }
+`
+
+export const SectionImageText = graphql`
+  fragment SectionImageText on WordPressAcf_SectionImageText {
+    __typename
+    title
+    text
+    link {
+      title
+      target
+      url
+    }
+    image {
+      localFile {
+        childImageSharp {      
+          fluid(maxWidth: 600, quality: 100) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+    image_alignment
+  }
+`
+
+export const SectionText = graphql`
+  fragment SectionText on WordPressAcf_SectionText {
+    __typename
+    title
+    text
+  }
+`
+
+export const SectionTextCards = graphql`
+  fragment SectionTextCards on WordPressAcf_SectionTextCards {
+    __typename
+    cards {
+      title
+      text
+      link {
+        title
+        target
+        url
       }
     }
   }
